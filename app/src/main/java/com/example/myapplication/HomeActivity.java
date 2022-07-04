@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.chat.ChatActivity;
+import com.example.myapplication.util.Crawler;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -40,8 +41,8 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
-        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+        //startActivity(intent);
 
 
 //        //대충 테스트
@@ -92,16 +93,19 @@ public class HomeActivity extends AppCompatActivity {
         /*
         Main 쓰레드에서 네트워크 연결을 하면 나타나는 에러 발생.
         메인 쓰레드에서 네트워크 호출을 하게되면 화면이 응답을 기다리는 동안 화면이 멈춰버리게 되므로 에러를 발생시킨다
+        */
+
         Crawler crawler = new Crawler();
         new Thread() {
             public void run() {
                 try {
-                    crawler.tvSchedule();
+                    Log.d("크롤러 실행 : ", "..");
+                    crawler.tvScheduleParse();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }.start();
-        */
+
     }
 }
