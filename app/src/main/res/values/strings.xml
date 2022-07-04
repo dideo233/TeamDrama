@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="kakao_native_appKey">034b6914c28788c1f675ac00b751915f</string>
+</resources>

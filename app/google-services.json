@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "994774034838",
+    "project_id": "drama-a26b0",
+    "storage_bucket": "drama-a26b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994774034838:android:5319b9377adbce86cd95b7",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994774034838-6llm5ob7bjgk02afluvnvglpde7354pc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "feb06c1e34c18b3b82475d07c2b0b7b7c05dcae6"
+          }
+        },
+        {
+          "client_id": "994774034838-1301l9hl9vd5taih3ehnphd2tejiemkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7-TuHj3_LA0oki3aIZrSVlzKTmwgIn3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994774034838-1301l9hl9vd5taih3ehnphd2tejiemkr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
