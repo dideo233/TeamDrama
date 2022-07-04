@@ -23,8 +23,9 @@
         android:layout_gravity="center_vertical"
         android:id="@+id/editLoginEmail"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="20dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/edit_test_style"
         android:hint="  이메일을 입력하세요"
         android:textColorHint="@color/dark" />
@@ -32,7 +33,7 @@
     <EditText
         android:id="@+id/editLoginPwd"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_margin="20dp"
         android:background="@drawable/edit_test_style"
         android:hint="  비밀번호를 입력하세요"
@@ -43,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
 
         <Button
@@ -67,7 +69,8 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
