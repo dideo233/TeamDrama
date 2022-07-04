@@ -4,48 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark"
     android:orientation="vertical"
-    android:gravity="center_vertical"
     tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="222dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/extrabold"
+        android:text="방구석 온에어"
+        android:textColor="@color/light"
+        android:textSize="60dp" />
+
     <EditText
+        android:layout_gravity="center_vertical"
         android:id="@+id/editLoginEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:hint="input email"
-        />
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/edit_test_style"
+        android:hint="  이메일을 입력하세요"
+        android:textColorHint="@color/dark" />
+
     <EditText
         android:id="@+id/editLoginPwd"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/edit_test_style"
+        android:hint="  비밀번호를 입력하세요"
         android:inputType="textPassword"
-        android:hint="input password"
-        />
+        android:textColorHint="@color/dark" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_margin="20dp"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/btnLogin"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그인"
-            />
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@color/yellow"
+            android:text="로그인" />
+
         <Button
             android:id="@+id/btnSignup"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원가입"
-            />
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@color/yellow"
+            android:text="회원가입" />
     </LinearLayout>
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <!--
         <Button

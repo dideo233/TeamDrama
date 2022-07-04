@@ -43,21 +43,21 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
         startActivity(intent);
 
-        /*
-        //대충 테스트
-        Log.d("provider Data :",user.getProviderData().toString());
-        for(UserInfo profile : user.getProviderData()){
-            Log.d("pro : ", profile.getProviderId());
-            Log.d("Provider-specific UID:", profile.getEmail());
-            Log.d("Name:", profile.getEmail());
-        }
 
-        TextView tvUserEmail = findViewById(R.id.tvUserEmail);
-        tvUserEmail.setText(user.getEmail());
-        TextView tvUserProvider = findViewById(R.id.tvUserProvider);
-        tvUserProvider.setText(user.getProviderData().get(1).getProviderId());
-        TextView tvDisplayName = findViewById(R.id.tvDisplayName);
-        tvDisplayName.setText(user.getDisplayName());
+//        //대충 테스트
+//        Log.d("provider Data :",user.getProviderData().toString());
+//        for(UserInfo profile : user.getProviderData()){
+//            Log.d("pro : ", profile.getProviderId());
+//            Log.d("Provider-specific UID:", profile.getEmail());
+//            Log.d("Name:", profile.getEmail());
+//        }
+//
+//        TextView tvUserEmail = findViewById(R.id.tvUserEmail);
+//        tvUserEmail.setText(user.getEmail());
+//        TextView tvUserProvider = findViewById(R.id.tvUserProvider);
+//        tvUserProvider.setText(user.getProviderData().get(1).getProviderId());
+//        TextView tvDisplayName = findViewById(R.id.tvDisplayName);
+//        tvDisplayName.setText(user.getDisplayName());
 
         Button btnLogout = findViewById(R.id.btnLogout);
         //로그아웃 (* 리스너?)
@@ -70,20 +70,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        //구글 계정 연결 끈기
-        Button btnSignout = findViewById(R.id.btnSignout);
-        btnSignout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //다른 액티비티의 메소드를 호출하기 위해 new 키워드로 액티비티 생성하는 것은 불가
-                //https://soo0100.tistory.com/1266 참고
+//        //구글 계정 연결 끈기
+//        Button btnSignout = findViewById(R.id.btnSignout);
+//        btnSignout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //다른 액티비티의 메소드를 호출하기 위해 new 키워드로 액티비티 생성하는 것은 불가
+//                //https://soo0100.tistory.com/1266 참고
+//
+//                ((SignUpWithGoogleActivity)SignUpWithGoogleActivity.mContext).revokeAccess();
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
-                ((SignUpWithGoogleActivity)SignUpWithGoogleActivity.mContext).revokeAccess();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-         */
     }
 
     @Override
