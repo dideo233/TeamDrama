@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/drawable/edit_test_style.xml" value="0.1465" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/drawable/enable_button.xml" value="0.1465" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/drawable/round_button.xml" value="0.1485" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/drawable/toast.xml" value="0.1465" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/font/font.xml" value="0.2712962962962963" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_main.xml" value="0.28014505893019037" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_sing_up.xml" value="0.24796010879419764" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/toast_layout.xml" value="0.24342701722574797" />
         <entry key="..\:/drama/app/src/main/res/layout/activity_chat.xml" value="0.2875" />
         <entry key="..\:/drama/app/src/main/res/layout/activity_home.xml" value="0.18802083333333333" />
         <entry key="..\:/drama/app/src/main/res/layout/row_chat.xml" value="0.2864583333333333" />

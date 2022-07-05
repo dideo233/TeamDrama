@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,7 +45,17 @@ public class MainActivity extends AppCompatActivity {
                 if (!editLoginEmail.getText().toString().equals("") && !editLoginPwd.getText().toString().equals("")) {
                     loginUser(editLoginEmail.getText().toString(), editLoginPwd.getText().toString());
                 } else {
-                    Toast.makeText(MainActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MainActivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+                    TextView text = (TextView) layout.findViewById(R.id.text);
+                    text.setText("계정과 비밀번호를 입력하세요.");
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(layout);
+                    toast.show();
                 }
 
             }
@@ -102,10 +116,30 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // 로그인 성공
-                        Toast.makeText(MainActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+                        TextView text = (TextView) layout.findViewById(R.id.text);
+                        text.setText("로그인 성공.");
+
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
                     } else {
                         // 로그인 실패
-                        Toast.makeText(MainActivity.this, "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+                        TextView text = (TextView) layout.findViewById(R.id.text);
+                        text.setText("아이디 또는 비밀번호가 일치하지 않습니다.");
+
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
                     }
 
                 }
