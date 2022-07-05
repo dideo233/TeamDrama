@@ -2,9 +2,12 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -77,7 +80,17 @@ public class SingUpActivity extends AppCompatActivity {
 
         //* 1.기본적으로 firebase 회원가입 시 pwd는 6자 이상)
         if(id.length()==0 && pwd.length() < 6 && pwdCheck.length()<6 && nickname.length() == 0){
-            Toast.makeText(SingUpActivity.this, "회원가입 데이터를 모두 입력하세요." ,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SingUpActivity.this, "회원가입 데이터를 모두 입력하세요." ,Toast.LENGTH_SHORT).show();
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+            TextView text = (TextView) layout.findViewById(R.id.text);
+            text.setText("회원가입 데이터를 모두 입력하세요");
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
             return;
         }
 
@@ -89,7 +102,17 @@ public class SingUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(SingUpActivity.this, "회원가입에 성공했습니다." ,Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(SingUpActivity.this, "회원가입에 성공했습니다." ,Toast.LENGTH_SHORT).show();
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+                                TextView text = (TextView) layout.findViewById(R.id.text);
+                                text.setText("회원가입에 성공했습니다.");
+
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
                                 FirebaseUser user = mAuth.getCurrentUser();
 
                                 //DB 저장
@@ -116,12 +139,32 @@ public class SingUpActivity extends AppCompatActivity {
 
                                 finish();
                             } else {
-                                Toast.makeText(SingUpActivity.this, "회원가입에 실패했습니다." ,Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(SingUpActivity.this, "회원가입에 실패했습니다." ,Toast.LENGTH_SHORT).show();
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+                                TextView text = (TextView) layout.findViewById(R.id.text);
+                                text.setText("회원가입에 실패했습니다.");
+
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
                             }
                         }
                     });
         }else{
-            Toast.makeText(SingUpActivity.this, "비밀번호가 일치하지 않습니다." ,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SingUpActivity.this, "비밀번호가 일치하지 않습니다." ,Toast.LENGTH_SHORT).show();
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+            TextView text = (TextView) layout.findViewById(R.id.text);
+            text.setText("비밀번호가 일치하지 않습니다.");
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
         }
     }
 
@@ -130,7 +173,17 @@ public class SingUpActivity extends AppCompatActivity {
         id= userId.getText().toString();
 
         if(id.length() == 0){
-            Toast.makeText(SingUpActivity.this, "이메일을 입력하세요." ,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SingUpActivity.this, "이메일을 입력하세요." ,Toast.LENGTH_SHORT).show();
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+            TextView text = (TextView) layout.findViewById(R.id.text);
+            text.setText("이메일을 입력하세요.");
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
             return;
         }
         DocumentReference docRef = db.collection("member").document(id);
@@ -141,10 +194,30 @@ public class SingUpActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()){//이미 존재하는 이메일
                         Log.d("select : ", ""+document.getData());
-                        Toast.makeText(SingUpActivity.this, "이미 사용 중인 이메일입니다" ,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(SingUpActivity.this, "이미 사용 중인 이메일입니다" ,Toast.LENGTH_SHORT).show();
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+                        TextView text = (TextView) layout.findViewById(R.id.text);
+                        text.setText("이미 사용 중인 이메일입니다");
+
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
                     } else { //사용 가능 이메일
                         Log.d("select : ", "no such document");
-                        Toast.makeText(SingUpActivity.this, "사용 가능한 이메일입니다" ,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(SingUpActivity.this, "사용 가능한 이메일입니다" ,Toast.LENGTH_SHORT).show();
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+
+                        TextView text = (TextView) layout.findViewById(R.id.text);
+                        text.setText("사용 가능한 이메일입니다");
+
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
                         btnSignupCheck.setEnabled(true);
                     }
                 } else {

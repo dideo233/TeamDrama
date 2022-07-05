@@ -5,15 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/dark"
     tools:context=".SingUpActivity">
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:gravity="center"
-        android:textColor="#1F51B7"
-        android:textSize="24sp"
-        android:text="회원가입" />
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/extrabold"
+        android:text="회원가입"
+        android:textColor="@color/light"
+        android:textSize="60dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,59 +29,74 @@
             <EditText
                 android:id="@+id/editUserId"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_height="40dp"
                 android:layout_weight="5"
+                android:layout_margin="5dp"
                 android:padding="10dp"
                 android:gravity="left"
                 android:textSize="15dp"
-                android:hint="이메일" />
+                android:hint="이메일"
+                android:background="@drawable/edit_test_style"/>
             <Button
                 android:id="@+id/btnEmailcheck"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="중복확인"
+                android:layout_margin="5dp"
+                android:background="@drawable/round_button"
                 />
         </LinearLayout>
         <EditText
             android:id="@+id/editUserNickname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
             android:gravity="left"
             android:padding="10dp"
             android:textSize="15dp"
             android:hint="닉네임"
+            android:background="@drawable/edit_test_style"
             />
         <EditText
             android:id="@+id/editUserPwd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
             android:padding="10dp"
             android:gravity="left"
             android:textSize="15dp"
             android:inputType="textPassword"
-            android:hint="비밀번호 입력" />
+            android:hint="비밀번호 입력"
+            android:background="@drawable/edit_test_style"/>
 
         <EditText
             android:id="@+id/editUserPwdCheck"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
             android:padding="10dp"
             android:gravity="left"
             android:textSize="15dp"
             android:inputType="textPassword"
-            android:hint="비밀번호 확인" />
+            android:hint="비밀번호 확인"
+            android:background="@drawable/edit_test_style"/>
 
         <Button
             android:id="@+id/btnSignupCheck"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
             android:enabled="false"
-            android:text="확인" />
+            android:text="확인"
+            android:background="@drawable/enable_button"/>
     </LinearLayout>
 </LinearLayout>

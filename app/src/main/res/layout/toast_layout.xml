@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/toast"
         android:padding="10dp"
+        android:fontFamily="@font/regular"
         android:textColor="@color/dark"
-        android:textSize="20dp"
+        android:textSize="15dp"
         />
 
 </LinearLayout>
