@@ -1,10 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+<<<<<<< Updated upstream
     <style name="Theme.MyApplication" parent="Theme.AppCompat.DayNight.NoActionBar">
+=======
+<<<<<<< HEAD
+    <style name="Theme.MyApplication" parent="Theme.AppCompat.Light">
+        <!--타이틀 바 제거-->
+        <item name="windowNoTitle">true</item>
+=======
+    <style name="Theme.MyApplication" parent="Theme.AppCompat.DayNight.NoActionBar">
+>>>>>>> 2cca9da75cfaf00bde4b9db10b54ac48f28e26dd
+>>>>>>> Stashed changes
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/dark</item>
+        <item name="colorPrimaryVariant">@color/dark</item>
+        <item name="colorOnPrimary">@color/dark</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
