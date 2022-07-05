@@ -48,7 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'com.google.firebase:firebase-analytics'
 
-    //Jsoup : 동적 크롤링 필요 시 셀리니움 등 알아보기
+    //Jsoup
     implementation 'org.jsoup:jsoup:1.14.3'
 
     //Kakao SDK

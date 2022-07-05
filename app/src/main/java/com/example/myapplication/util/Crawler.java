@@ -4,31 +4,53 @@ import android.util.Log;
 
 import com.example.myapplication.model.TvScheduleData;
 
+import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 public class Crawler {
-    List<TvScheduleData> onAirList = new ArrayList<>();
+    //네이버 TV 편성표
+    //https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=tv+%ED%8E%B8%EC%84%B1%ED%91%9C
 
-    //Jsoup (네이버 편성표 파싱)
-    String url = "https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=tv+%ED%8E%B8%EC%84%B1%ED%91%9C";
+    String url = "https://tv.kt.com/tv/channel/pSchedule.asp";
     Connection conn = Jsoup.connect(url);
     Document html;
-
     public void tvScheduleParse() {
         try {
-            html = conn.get();
+            html = conn
+                    .header("Accept-Encodin","gzip, deflate, br")
+                    .data("view_type","1")
+                    .data("service_ch_no","1")//MBC Every1 (다른 방송국 편성 정보 파싱하려면 채널 번호만 바꾸기. ex:52 spoTV2 )
+                    .data("ch_type","3")
+                    .ignoreContentType(true).post();
+                    //seldate : 해당 페이로드 추가하는 것으로 원하는 일자의 편성표 가지고 올 수 있음
+
+            Elements timeH = html.select(".time:eq(0)");  //시
+            Elements timeM = html.select(".time:eq(1)");  //분
+            Elements program = html.select(".program");   //방송명
+            Elements category = html.select(".category"); //장르
+
+            Log.d("방송사 ", html.select("img").attr("alt")); //방송사
+            for(int i = 0; i < timeH.size(); i++){
+                if(program.get(i).text().contains("방송중")){ //현재 방송 중인 프로그램
+                    Log.d("time " , timeH.get(i).text()+":"+timeM.get(i).text());
+                    Log.d("program " , program.get(i).text());
+                    Log.d("category " , category.get(i).text());
+                    continue;
+                }
+
+                Log.d("time " , timeH.get(i).text()+":"+timeM.get(i).text());
+                Log.d("program " , program.get(i).text());
+                Log.d("category " , category.get(i).text());
+            }
+
+            /*
+            //네이버 TV 편성표
             //Elements all = html.select(".timeline_box .ind_program");
             Elements onAirTitle = html.select("div[class='ind_program on']").select("div[class='scm_ellipsis _ellipsis']");
             Elements onAirTime = html.select("div[class='ind_program on']").select(".sub_info");
@@ -53,6 +75,7 @@ public class Crawler {
             for(int i=0; i < offAir.size(); i++){
                 Log.d("data :  ", offAir.get(i).text());
             }
+            */
         } catch (IOException e){
             e.printStackTrace();
         }
