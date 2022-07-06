@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) { //로그인
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     startActivity(intent);
                     finish();
                 } else { //로그아웃
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(firebaseAuthListener);
 
         if(mAuth.getCurrentUser() != null){ //이미 로그인 된 상태
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
             startActivity(intent);
         } else {
             Log.d("mAuth.getCurrentUser ", "user is null");

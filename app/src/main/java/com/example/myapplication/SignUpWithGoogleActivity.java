@@ -151,7 +151,7 @@ public class SignUpWithGoogleActivity extends AppCompatActivity {
     public void updateUI(FirebaseUser user) {
         if(user != null){
             Log.d("로그인된 계정 : ", ""+mAuth.getCurrentUser().getEmail());
-            Intent intent = new Intent(SignUpWithGoogleActivity.this, HomeActivity.class);
+            Intent intent = new Intent(SignUpWithGoogleActivity.this, MainActivity2.class);
             startActivity(intent);
             finish();
         }

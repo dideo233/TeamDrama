@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/Mainpage"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="HOME" />
 
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/Mypage"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="PROFILE" />
+        android:title="My" />
 </menu>
