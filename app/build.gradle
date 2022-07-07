@@ -43,10 +43,24 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
     implementation 'com.google.firebase:firebase-auth'
 
-    //firebase cloud db, realtime, 분석
+    //firebase cloud db, realtime, 분석, 메시징, 스토리지, 원격설정
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging:23.0.6'
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
+    implementation 'com.google.firebase:firebase-config'
+
+    //Gson 파싱
+    implementation 'com.google.code.gson:gson:2.9.0'
+    //okhttp 통신
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+
+    //이미지 glide
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+
+    //애니메이션 interpolator(보간기)
+    implementation "androidx.interpolator:interpolator:1.0.0"
 
     //Jsoup
     implementation 'org.jsoup:jsoup:1.14.3'
