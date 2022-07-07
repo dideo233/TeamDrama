@@ -34,7 +34,6 @@ public class MyFragment extends Fragment {
     FirebaseUser user;
     String signEmail;
     DocumentSnapshot document;
-    Object loginKind;
     String nicknames;
     String nick;
 
@@ -74,19 +73,6 @@ public class MyFragment extends Fragment {
 
 
 
-//        //구글 계정 연결 끊기
-//        Button btnSignout = findViewById(R.id.btnSignout);
-//        btnSignout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //다른 액티비티의 메소드를 호출하기 위해 new 키워드로 액티비티 생성하는 것은 불가
-//                //https://soo0100.tistory.com/1266 참고
-//
-//                ((SignUpWithGoogleActivity)SignUpWithGoogleActivity.mContext).revokeAccess();
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         //
 //        signEmail = user.getEmail();
@@ -123,6 +109,7 @@ public class MyFragment extends Fragment {
 
         View rootview = inflater.inflate(R.layout.fragment_my,container,false);
         Button btnLogout = (Button)rootview.findViewById(R.id.btnLogout);
+        Button btnSignout = (Button)rootview.findViewById(R.id.btnSignout);
         ImageButton btnNickChange = (ImageButton)rootview.findViewById(R.id.nickChange);
         TextView nickname = (TextView)rootview.findViewById(R.id.tvnickname);
 
@@ -137,11 +124,14 @@ public class MyFragment extends Fragment {
                 if (task.isSuccessful()) {
                     document = task.getResult();
                     if (document.exists()) {
-                        loginKind=document.getData().get("loginKind");
                         nicknames=String.valueOf(document.getData().get("nickname"));
-                        Log.d("loginKind", "구글: "+loginKind);
                         Log.d("nickname", "닉네임즈: "+nicknames);
-                        nickname.setText(nicknames);
+                        if (nicknames.length()>=7){
+                            String longnick = nicknames.substring(0,5)+"...";
+                            nickname.setText(longnick);
+                        }else{
+                            nickname.setText(nicknames);
+                        }
                     } else {
                         Log.d("TAG", "No such document");
                     }
@@ -151,19 +141,34 @@ public class MyFragment extends Fragment {
             }
         });
 
-
         //로그아웃 (* 리스너?)
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
         });
-        // Inflate the layout for this fragment
+
+        //구글 계정 연결 끊기
+        btnSignout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //다른 액티비티의 메소드를 호출하기 위해 new 키워드로 액티비티 생성하는 것은 불가
+                //https://soo0100.tistory.com/1266 참고
+
+                ((SignUpWithGoogleActivity)SignUpWithGoogleActivity.mContext).revokeAccess();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
         return rootview;
-    }
+
+}
+
+
     @Override
     public void onStart() {
         super.onStart();
