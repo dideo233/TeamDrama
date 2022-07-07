@@ -230,26 +230,5 @@ public class MyFragment extends Fragment {
 }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        /*
-        Main 쓰레드에서 네트워크 연결을 하면 나타나는 에러 발생.
-        메인 쓰레드에서 네트워크 호출을 하게되면 화면이 응답을 기다리는 동안 화면이 멈춰버리게 되므로 에러를 발생시킨다
-        */
-
-        Crawler crawler = new Crawler();
-        new Thread() {
-            public void run() {
-                try {
-                    Log.d("크롤러 실행 : ", "..");
-                    crawler.tvScheduleParse();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-
-    }
 
 }

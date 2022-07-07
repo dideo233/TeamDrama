@@ -5,10 +5,14 @@
         android:enabled="true"
         android:icon="@drawable/home"
         android:title="HOME" />
-
+    <item
+        android:id="@+id/Seachpage"
+        android:enabled="true"
+        android:icon="@drawable/search"
+        android:title="SEARCH" />
     <item
         android:id="@+id/Mypage"
         android:enabled="true"
         android:icon="@drawable/my"
-        android:title="My" />
+        android:title="MY" />
 </menu>

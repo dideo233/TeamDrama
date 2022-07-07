@@ -7,4 +7,36 @@ public class TvScheduleData {
     String time;
     String category;
     boolean onAir;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public boolean isOnAir() {
+        return onAir;
+    }
+
+    public void setOnAir(boolean onAir) {
+        this.onAir = onAir;
+    }
 }

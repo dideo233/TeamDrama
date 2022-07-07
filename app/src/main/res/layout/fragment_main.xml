@@ -1,11 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainFragment"
-    android:background="@color/pink">
+    android:orientation="vertical"
+    android:background="@color/dark">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/light"
+        android:layout_margin="20dp"
+        android:text="방구석 온에어"
+        android:textSize="40dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/extrabold"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="0.7"
+        android:fontFamily="@font/extrabold"
+        android:text="실시간 TOP5"
+        android:textColor="@color/light"
+        android:textSize="30dp" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:layout_marginBottom="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/top1"
+                    android:layout_width="150dp"
+                    android:layout_height="272dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="#ff0000"
+                    android:gravity="center"
+                    android:text="#ff0000" />
+
+                <ImageView
+                    android:id="@+id/top2"
+                    android:layout_width="150dp"
+                    android:layout_height="272dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="#00ff00"
+                    android:gravity="center"
+                    android:text="#00ff00" />
+
+                <ImageView
+                    android:id="@+id/top3"
+                    android:layout_width="150dp"
+                    android:layout_height="272dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/purple_200"
+                    android:gravity="center"
+                    android:text="#0000ff" />
+
+                <ImageView
+                    android:id="@+id/top4"
+                    android:layout_width="150dp"
+                    android:layout_height="272dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="#0000ff" />
+
+                <ImageView
+                    android:id="@+id/top5"
+                    android:layout_width="150dp"
+                    android:layout_height="272dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/yellow"
+                    android:gravity="center"
+                    android:text="#0000ff" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="0.7"
+            android:fontFamily="@font/extrabold"
+            android:text="최신 채팅방"
+            android:textColor="@color/light"
+            android:textSize="30dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvchat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:layout_weight="4"/>
+
+
+</LinearLayout>

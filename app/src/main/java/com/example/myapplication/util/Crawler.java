@@ -2,6 +2,9 @@ package com.example.myapplication.util;
 
 import android.util.Log;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.ChatListAdapter;
 import com.example.myapplication.model.TvScheduleData;
 
 import org.json.JSONObject;
@@ -20,15 +23,18 @@ public class Crawler {
     String url = "https://tv.kt.com/tv/channel/pSchedule.asp";
     Connection conn = Jsoup.connect(url);
     Document html;
-    public void tvScheduleParse() {
+    ArrayList<TvScheduleData> tvScheduleData = new ArrayList<>();
+    ChatListAdapter chatListAdapter;
+
+    public  void tvScheduleParse() {
         try {
+
             html = conn
                     .header("Accept-Encodin","gzip, deflate, br")
                     .data("view_type","1")
                     .data("service_ch_no","1")//MBC Every1 (다른 방송국 편성 정보 파싱하려면 채널 번호만 바꾸기. ex:52 spoTV2 )
                     .data("ch_type","3")
                     .ignoreContentType(true).post();
-                    //seldate : 해당 페이로드 추가하는 것으로 원하는 일자의 편성표 가지고 올 수 있음
 
             Elements timeH = html.select(".time:eq(0)");  //시
             Elements timeM = html.select(".time:eq(1)");  //분
@@ -36,18 +42,28 @@ public class Crawler {
             Elements category = html.select(".category"); //장르
 
             Log.d("방송사 ", html.select("img").attr("alt")); //방송사
+
+
             for(int i = 0; i < timeH.size(); i++){
                 if(program.get(i).text().contains("방송중")){ //현재 방송 중인 프로그램
-                    Log.d("time " , timeH.get(i).text()+":"+timeM.get(i).text());
-                    Log.d("program " , program.get(i).text());
-                    Log.d("category " , category.get(i).text());
+                    Log.d("time::: " , timeH.get(i).text()+":"+timeM.get(i).text());
+                    Log.d("program::: " , program.get(i).text());
+                    Log.d("category::: " , category.get(i).text());
+                    TvScheduleData tvSchedule = new TvScheduleData();
+                    tvSchedule.setCategory(category.get(i).text());
+                    tvSchedule.setTitle(program.get(i).text());
+                    tvSchedule.setTime(category.get(i).text());
+                    tvScheduleData.add(tvSchedule);
                     continue;
                 }
 
                 Log.d("time " , timeH.get(i).text()+":"+timeM.get(i).text());
                 Log.d("program " , program.get(i).text());
                 Log.d("category " , category.get(i).text());
+
             }
+             chatListAdapter = new ChatListAdapter(tvScheduleData);
+            Log.d("tvScheduleData size()", ""+tvScheduleData.size());
 
             /*
             //네이버 TV 편성표
@@ -80,4 +96,5 @@ public class Crawler {
             e.printStackTrace();
         }
     }
+
 }

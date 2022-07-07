@@ -34,6 +34,9 @@ public class MainActivity2 extends AppCompatActivity {
                     case R.id.Mypage:
                         getSupportFragmentManager().beginTransaction().replace(R.id.change, new MyFragment()).commit();
                         break;
+                    case R.id.Seachpage:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.change, new SearchFragment()).commit();
+                        break;
                 }
                 return true;
             }
