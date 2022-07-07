@@ -9,13 +9,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvnickname"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
@@ -49,9 +50,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_weight="0.5"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -76,82 +78,55 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="5dp"
+            android:layout_weight="2.5"
             android:fontFamily="@font/extrabold"
             android:text="최근알림"
             android:textColor="@color/light"
             android:textSize="30dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/extrabold"
-            android:text="님 "
-            android:textColor="@color/light"
-            android:textSize="35dp" />
 
         <Button
             android:id="@+id/alarmmore"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_margin="20dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/bold"
-            android:textColor="@color/light"
-            android:textSize="30dp"
-            android:text="더보기 >"
-            android:background="@android:color/transparent"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvnickname"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="5dp"
-            android:fontFamily="@font/extrabold"
-            android:text="닉네임"
-            android:textColor="@color/light"
-            android:textSize="30dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/extrabold"
-            android:text="님 "
-            android:textColor="@color/light"
-            android:textSize="35dp" />
-
-        <ImageButton
-            android:id="@+id/nickChange"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_margin="20dp"
-            android:layout_marginTop="5dp"
-            android:adjustViewBounds="true"
+            android:layout_weight="0.3"
             android:background="@android:color/transparent"
-            android:scaleType="fitEnd"
-            android:src="@drawable/eraser" />
+            android:fontFamily="@font/bold"
+            android:text="더보기 >"
+            android:textColor="@color/light"
+            android:textSize="23dp" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/extrabold"
+        android:text="관심 프로그램"
+        android:textColor="@color/light"
+        android:textSize="30dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.5"/>
+
 
 </LinearLayout>

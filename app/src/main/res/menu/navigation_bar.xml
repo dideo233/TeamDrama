@@ -3,12 +3,12 @@
     <item
         android:id="@+id/Mainpage"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/home"
         android:title="HOME" />
 
     <item
         android:id="@+id/Mypage"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/my"
         android:title="My" />
 </menu>

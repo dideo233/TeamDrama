@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,23 +13,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.myapplication.util.Crawler;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
+import com.google.firebase.firestore.Transaction;
 
 
 public class MyFragment extends Fragment {
@@ -36,6 +44,10 @@ public class MyFragment extends Fragment {
     DocumentSnapshot document;
     String nicknames;
     String nick;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    DocumentReference docRef ;
 
 
     @Override
@@ -115,9 +127,8 @@ public class MyFragment extends Fragment {
 
         signEmail = user.getEmail();
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        docRef = db.collection("member").document(signEmail);
 
-        DocumentReference docRef = db.collection("member").document(signEmail);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -141,6 +152,8 @@ public class MyFragment extends Fragment {
             }
         });
 
+
+
         //로그아웃 (* 리스너?)
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +175,54 @@ public class MyFragment extends Fragment {
                 ((SignUpWithGoogleActivity)SignUpWithGoogleActivity.mContext).revokeAccess();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //닉네임 수정 버튼
+        btnNickChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View dialogView = view.inflate(view.getContext(), R.layout.nick_change, null);
+
+                EditText edtnick = dialogView.findViewById(R.id.edtnick);
+
+                android.app.AlertDialog.Builder dlg = new AlertDialog.Builder(view.getContext());
+                dlg.setTitle("닉네임 변경");
+                dlg.setView(dialogView);
+                dlg.setPositiveButton("변경", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String newnick = edtnick.getText().toString();
+                        db.runTransaction(new Transaction.Function<Void>() {
+                                    @Override
+                                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                                        //닉네임 변경
+                                        transaction.update(docRef, "nickname", newnick);
+                                        return null;
+                                    }
+                                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d("TAG", "Transaction success!");
+                                        nickname.setText(newnick);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w("TAG", "Transaction failure.", e);
+                                    }
+                                });
+
+                    }
+                });
+                dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                dlg.show();
             }
         });
         return rootview;
