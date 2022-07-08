@@ -18,12 +18,11 @@ import android.widget.Toast;
 import com.example.myapplication.util.Crawler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 public class SplashActivity extends AppCompatActivity {
-    Crawler crawler;
+
     private LinearLayout linearLayout;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
 
@@ -80,8 +79,9 @@ public class SplashActivity extends AppCompatActivity {
                 });
 
                 builder.create().show();
-            } else {
-                startActivity(new Intent(this, MainActivity.class));
+
+            } else { //로그인페이지로 이동
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
             }
 
@@ -96,20 +96,18 @@ public class SplashActivity extends AppCompatActivity {
         메인 쓰레드에서 네트워크 호출을 하게되면 화면이 응답을 기다리는 동안 화면이 멈춰버리게 되므로 에러를 발생시킨다
         */
 
-        crawler = new Crawler();
-            new Thread() {
-                public void run() {
-                    try {
-                        Log.d("크롤러 실행 : ", "..");
-                        crawler.tvScheduleParse();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }.start();
-        //크롤러
-//        crawler = new Crawler();
-//        crawler.tvScheduleParse();
+
+//            new Thread() {
+//                public void run() {
+//                    try {
+//                        Log.d("크롤러 실행 : ", "..");
+//                        crawler.tvScheduleParse();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }.start();
 
     }
+
 }

@@ -21,7 +21,7 @@ import java.util.Map;
 
 
 //API 28부터 Fragment -> FragmentActivity
-public class NavigationActivity extends FragmentActivity {
+public class FirstMainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,6 @@ public class NavigationActivity extends FragmentActivity {
         setContentView(R.layout.activity_firtst_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.mainactivity_bottomnavigationview);
-
-        //로그인 기본화면
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainactivity_framelayout, new PeopleFragment()).commit();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

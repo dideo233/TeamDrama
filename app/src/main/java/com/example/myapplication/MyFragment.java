@@ -127,6 +127,7 @@ public class MyFragment extends Fragment {
 
         signEmail = user.getEmail();
 
+        ///**************************
         docRef = db.collection("member").document(signEmail);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -151,6 +152,8 @@ public class MyFragment extends Fragment {
                 }
             }
         });
+
+        ///**************************
 
 
 
