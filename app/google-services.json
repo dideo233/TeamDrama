@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "994774034838",
+    "firebase_url": "https://drama-a26b0-default-rtdb.firebaseio.com",
     "project_id": "drama-a26b0",
     "storage_bucket": "drama-a26b0.appspot.com"
   },
@@ -19,6 +20,30 @@
           "android_info": {
             "package_name": "com.example.myapplication",
             "certificate_hash": "feb06c1e34c18b3b82475d07c2b0b7b7c05dcae6"
+          }
+        },
+        {
+          "client_id": "994774034838-fjdac6ndpfu7uvair4sopekntb6o6g49.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "86b5d29590dfea254e7dc46067651c45a184b6bb"
+          }
+        },
+        {
+          "client_id": "994774034838-ke410v799qckvb6m0fl8jtb9pcsb8fkf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "c9f899696757369fa81439af047678ee66fe1133"
+          }
+        },
+        {
+          "client_id": "994774034838-kkq319dqlgutvlhk0tqfcbf376bhddeg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "43312f0610de87a4feae10c3c17eea673bea61ca"
           }
         },
         {

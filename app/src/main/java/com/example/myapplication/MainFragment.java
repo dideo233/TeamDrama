@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,47 +15,31 @@ import android.widget.Button;
 
 import com.example.myapplication.model.TvScheduleData;
 import com.example.myapplication.util.Crawler;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
-   // ArrayList<TvScheduleData> tvScheduleData;
+    ArrayList<TvScheduleData> tvScheduleData = new ArrayList<>();
     ChatListAdapter chatListAdapter;
-    Crawler crawler;
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-         /*
-        Main 쓰레드에서 네트워크 연결을 하면 나타나는 에러 발생.
-        메인 쓰레드에서 네트워크 호출을 하게되면 화면이 응답을 기다리는 동안 화면이 멈춰버리게 되므로 에러를 발생시킨다
-        */
-
-        crawler = new Crawler();
-        new Thread() {
-            public void run() {
-                try {
-                    Log.d("크롤러 실행 : ", "..");
-                    crawler.tvScheduleParse();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-
-
-        Log.d("onCreate", "onCreate()");
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+//        FirebaseDatabase.getInstance().getReference().child("broadcast").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                for(DataSnapshot item : task.getResult()){
+//
+//                }
+//            }
+//        });
+
+        chatListAdapter = new ChatListAdapter(tvScheduleData);
 
         View view = inflater.inflate(R.layout.fragment_main,container,false);
         RecyclerView rvchat = (RecyclerView)view.findViewById(R.id.rvchat);
