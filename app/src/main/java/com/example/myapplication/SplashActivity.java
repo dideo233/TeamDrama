@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.myapplication.util.Crawler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
@@ -96,17 +97,16 @@ public class SplashActivity extends AppCompatActivity {
         */
 
         crawler = new Crawler();
-        new Thread() {
-            public void run() {
-                try {
-                    Log.d("크롤러 실행 : ", "..");
-                    crawler.tvScheduleParse();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            new Thread() {
+                public void run() {
+                    try {
+                        Log.d("크롤러 실행 : ", "..");
+                        crawler.tvScheduleParse();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }.start();
-
+            }.start();
         //크롤러
 //        crawler = new Crawler();
 //        crawler.tvScheduleParse();

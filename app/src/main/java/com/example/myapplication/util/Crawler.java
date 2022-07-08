@@ -10,7 +10,10 @@ import com.example.myapplication.model.TvData;
 import com.example.myapplication.model.TvScheduleData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -29,11 +32,12 @@ public class Crawler {
     String url = "https://tv.kt.com/tv/channel/pSchedule.asp";
     Connection conn = Jsoup.connect(url);
     Document html;
-    TvData tvData = new TvData();
-    List<TvScheduleData> tvScheduleDataList = new ArrayList<>();
 
+    String broadcastStation; //방송사
+    String scheduleDate; //방송일자
 
-    ChatListAdapter chatListAdapter;
+    Boolean check = false; //기존크롤링정보여부 체크
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     public  void tvScheduleParse() {
         try {
@@ -50,62 +54,39 @@ public class Crawler {
             Elements program = html.select(".program");   //방송명
             Elements category = html.select(".category"); //장르
 
-            String broadcast = html.select("img").attr("alt");
-            Log.d("방송사 ", broadcast); //방송사
+            //방송사 구분
+            broadcastStation = html.select("img").attr("alt");
+            Log.d("방송사 ", broadcastStation); //방송사
 
-            for(int i = 0; i < timeH.size(); i++){
-
-                    Log.d("time::: " , timeH.get(i).text()+":"+timeM.get(i).text());
-                    Log.d("program::: " , program.get(i).text());
-                    Log.d("category::: " , category.get(i).text());
-                    TvScheduleData tvSchedule = new TvScheduleData();
-                    tvSchedule.setCategory(category.get(i).text());
-                    tvSchedule.setTitle(program.get(i).text());
-                    tvSchedule.setTime(timeH.get(i).text()+":"+timeM.get(i).text());
-                if(program.get(i).text().contains("방송중")) { //현재 방송 중인 프로그램
-                    String title = program.get(i).text();
-                    tvSchedule.setTitle(title.substring(4,title.length()));
-                    tvSchedule.setOnAir(true);
-                }
-                    tvScheduleDataList.add(tvSchedule);
-            }
+            //날짜
             long now = System.currentTimeMillis();
             Date date = new Date(now);
-
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String getTime = sdf.format(date);
+            scheduleDate = sdf.format(date);
 
-            tvData.setScheduleDate(getTime);
-            tvData.setTvScheduleData(tvScheduleDataList);
-            tvData.setBroadcastStation(broadcast);
-            dramaSave(tvData);
-//                }
-//
-//
-//
-//                Log.d("time " , timeH.get(i).text()+":"+timeM.get(i).text());
-//                Log.d("program " , program.get(i).text());
-//                Log.d("category " , category.get(i).text());
-//
-//            chatListAdapter = new ChatListAdapter(tvScheduleData);
-//            Log.d("tvScheduleData size()", ""+tvScheduleData.size());
+            //이미 데이터베이스에 크롤링 정보가 존재하는 경우에는 생략
+
+            for (int i = 0; i < timeH.size(); i++) {
+                Log.d("time::: ", timeH.get(i).text() + ":" + timeM.get(i).text());
+                Log.d("program::: ", program.get(i).text());
+                Log.d("category::: ", category.get(i).text());
+
+                //편성표 데이터
+                TvScheduleData tvScheduleData = new TvScheduleData();
+                tvScheduleData.setTitle(program.get(i).text());
+                tvScheduleData.setCategory(category.get(i).text());
+                tvScheduleData.setTime(timeH.get(i).text() + ":" + timeM.get(i).text());
+                if (program.get(i).text().contains("방송중")) { //현재 방송 중인 프로그램
+                    String title = program.get(i).text();
+                    tvScheduleData.setTitle(title.substring(4, title.length()));
+                    tvScheduleData.setOnAir(true);
+                }
+                //데이터 베이스에 방송 1개씩 저장 (채팅방 개설을 위한 키값부여)
+                database.getReference().child("broadcast").child(broadcastStation).child(scheduleDate).push().setValue(tvScheduleData);
+            }
 
         } catch (IOException e){
             e.printStackTrace();
         }
     }
-
-    void dramaSave(TvData tvData){
-
-        FirebaseDatabase.getInstance().getReference().child("broadcast").push().setValue(tvData)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.d("아아아아아 성공", "성공");
-                    }
-                });
-
-
-    }
-
 }

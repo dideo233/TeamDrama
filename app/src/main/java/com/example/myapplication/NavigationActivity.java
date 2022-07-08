@@ -21,7 +21,7 @@ import java.util.Map;
 
 
 //API 28부터 Fragment -> FragmentActivity
-public class FirstMainActivity extends FragmentActivity {
+public class NavigationActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
