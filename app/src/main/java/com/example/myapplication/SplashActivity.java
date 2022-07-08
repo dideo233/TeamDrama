@@ -81,7 +81,7 @@ public class SplashActivity extends AppCompatActivity {
                 builder.create().show();
 
             } else { //로그인페이지로 이동
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
                 finish();
             }
 
