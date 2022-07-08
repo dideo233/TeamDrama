@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SearchFragment"
+    android:background="@color/dark"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/editUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="5"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:gravity="left"
+            android:textSize="15dp"
+            android:hint="프로그램 제목을 입력해주세요"
+            android:background="@drawable/edit_test_style"
+            android:imeOptions="actionSearch"
+            android:inputType="text"/>
+        <ImageButton
+            android:id="@+id/nickChange"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitEnd"
+            android:src="@drawable/searchlight" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/searchList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:divider="@color/light"
+        android:dividerHeight="1dp"></ListView>
 
-</FrameLayout>
+</LinearLayout>

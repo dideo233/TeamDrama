@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.myapplication.model.TvData;
 import com.example.myapplication.model.TvScheduleData;
 import com.example.myapplication.util.Crawler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -26,10 +28,10 @@ public class MainFragment extends Fragment {
     ArrayList<TvScheduleData> tvScheduleData = new ArrayList<>();
     ChatListAdapter chatListAdapter;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 //        FirebaseDatabase.getInstance().getReference().child("broadcast").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
 //            @Override
 //            public void onComplete(@NonNull Task<DataSnapshot> task) {
