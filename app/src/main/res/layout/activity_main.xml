@@ -15,7 +15,7 @@
         android:layout_margin="20dp"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/extrabold"
-        android:text="방구석 온에어"
+        android:text="방구석 파티"
         android:textColor="@color/light"
         android:textSize="60dp" />
 
