@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".util.GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -25,11 +26,8 @@
             android:name=".chat.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignUpWithKaKaoActiviry"
-            android:exported="false" />
+            android:name=".SignUpWithKaKaoActivity"
+            android:exported="false"/>
         <activity
             android:name=".SignUpWithGoogleActivity"
             android:exported="false" />
@@ -47,7 +45,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <!-- 카카오톡 로그인 : Redirect URI 에 접근하기 위한 Activity -->
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="oauth"
+                    android:scheme="kakao034b6914c28788c1f675ac00b751915f" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

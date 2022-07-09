@@ -97,19 +97,5 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
             }
-
         }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        /*
-        Main 쓰레드에서 네트워크 연결을 하면 나타나는 에러 발생.
-        메인 쓰레드에서 네트워크 호출을 하게되면 화면이 응답을 기다리는 동안 화면이 멈춰버리게 되므로 에러를 발생시킨다
-        */
-
-
-
-    }
-
 }
