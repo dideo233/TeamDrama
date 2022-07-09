@@ -25,11 +25,24 @@ public class SplashActivity extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    private Crawler crawler = new Crawler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        new Thread() {
+            public void run() {
+                try {
+                    Log.d("크롤러 실행 : ", "..");
+                    crawler.tvScheduleParse();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
         //상태바 없애기
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -81,12 +94,11 @@ public class SplashActivity extends AppCompatActivity {
                 builder.create().show();
 
             } else { //로그인페이지로 이동
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
             }
 
         }
-
 
     @Override
     protected void onStart() {
@@ -97,16 +109,6 @@ public class SplashActivity extends AppCompatActivity {
         */
 
 
-//            new Thread() {
-//                public void run() {
-//                    try {
-//                        Log.d("크롤러 실행 : ", "..");
-//                        crawler.tvScheduleParse();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }.start();
 
     }
 

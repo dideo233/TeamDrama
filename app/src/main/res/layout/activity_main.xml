@@ -1,86 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="222dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/extrabold"
-        android:text="방구석 파티"
-        android:textColor="@color/light"
-        android:textSize="60dp" />
-
-    <EditText
-        android:layout_gravity="center_vertical"
-        android:id="@+id/editLoginEmail"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/edit_test_style"
-        android:hint="  이메일을 입력하세요"
-        android:textColorHint="@color/dark" />
-
-    <EditText
-        android:id="@+id/editLoginPwd"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/edit_test_style"
-        android:hint="  비밀번호를 입력하세요"
-        android:inputType="textPassword"
-        android:textColorHint="@color/dark" />
-
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/change"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal">
+        android:background="@color/light"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/navigation_bar"
+        android:id="@+id/nav"/>
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/round_button"
-            android:text="로그인" />
-
-        <Button
-            android:id="@+id/btnSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/round_button"
-            android:text="회원가입" />
-    </LinearLayout>
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <!--
-        <Button
-        android:id="@+id/btnLoginKakao"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/kakao_login_large_wide"/>
-    -->
-
-</LinearLayout>
+</RelativeLayout>

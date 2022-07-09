@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,45 +17,43 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.myapplication.util.Crawler;
+import com.example.myapplication.LoginActivity;
+import com.example.myapplication.R;
+import com.example.myapplication.SignUpWithGoogleActivity;
+import com.example.myapplication.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Source;
 import com.google.firebase.firestore.Transaction;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 public class MyFragment extends Fragment {
-    FirebaseUser user;
-    String signEmail;
-    DocumentSnapshot document;
-    String nicknames;
-    String nick;
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    DocumentReference docRef ;
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    DatabaseReference databaseReference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null){
+        if(user == null){  //로그인된 유저가 없는 경우
             return;
         }
 
@@ -125,36 +123,28 @@ public class MyFragment extends Fragment {
         ImageButton btnNickChange = (ImageButton)rootview.findViewById(R.id.nickChange);
         TextView nickname = (TextView)rootview.findViewById(R.id.tvnickname);
 
-        signEmail = user.getEmail();
-
-        ///**************************
-        docRef = db.collection("member").document(signEmail);
-
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("member").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    document = task.getResult();
-                    if (document.exists()) {
-                        nicknames=String.valueOf(document.getData().get("nickname"));
-                        Log.d("nickname", "닉네임즈: "+nicknames);
-                        if (nicknames.length()>=7){
-                            String longnick = nicknames.substring(0,5)+"...";
-                            nickname.setText(longnick);
-                        }else{
-                            nickname.setText(nicknames);
-                        }
-                    } else {
-                        Log.d("TAG", "No such document");
-                    }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserModel userData  = snapshot.getValue(UserModel.class);
+
+                String nick = userData.getNickName();
+                Log.d("nickname", "닉네임: " + nick);
+
+                if (nick.length() > 6) {
+                    String longnick = nick.substring(0, 5) + "...";
+                    nickname.setText(longnick);
                 } else {
-                    Log.d("TAG", "get failed with ", task.getException());
+                    nickname.setText(nick);
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("nickname 에러", "error: " + error.toString());
+            }
         });
-
-        ///**************************
-
 
 
         //로그아웃 (* 리스너?)
@@ -163,7 +153,7 @@ public class MyFragment extends Fragment {
             public void onClick(View view) {
 
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -176,7 +166,7 @@ public class MyFragment extends Fragment {
                 //https://soo0100.tistory.com/1266 참고
 
                 ((SignUpWithGoogleActivity)SignUpWithGoogleActivity.mContext).revokeAccess();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -195,27 +185,41 @@ public class MyFragment extends Fragment {
                 dlg.setPositiveButton("변경", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
                         String newnick = edtnick.getText().toString();
-                        db.runTransaction(new Transaction.Function<Void>() {
-                                    @Override
-                                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                                        //닉네임 변경
-                                        transaction.update(docRef, "nickname", newnick);
-                                        return null;
-                                    }
-                                }).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d("TAG", "Transaction success!");
-                                        nickname.setText(newnick);
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w("TAG", "Transaction failure.", e);
-                                    }
-                                });
+
+                        //database 업데이트는 해쉬맵형태로 (키값, 바꿀내용)
+                        Map<String, Object> updateData = new HashMap<>();
+                        updateData.put("nickName", newnick); //키값 대소문자 주의
+
+                        databaseReference.child("member").child(user.getUid()).updateChildren(updateData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d("닉네임변경", "Transaction success!");
+                                nickname.setText(newnick);
+                            }
+                        });
+
+//                        db.runTransaction(new Transaction.Function<Void>() {
+//                                    @Override
+//                                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+//                                        //닉네임 변경
+//                                        transaction.update(docRef, "nickname", newnick);
+//                                        return null;
+//                                    }
+//                                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                        Log.d("TAG", "Transaction success!");
+//                                        nickname.setText(newnick);
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        Log.w("TAG", "Transaction failure.", e);
+//                                    }
+//                                });
 
                     }
                 });

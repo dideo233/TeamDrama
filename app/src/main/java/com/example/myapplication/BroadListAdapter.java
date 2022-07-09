@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.model.ChatModel;
 import com.example.myapplication.model.TvScheduleData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,14 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
+public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.ViewHolder> {
 
     private List<TvScheduleData> tvScheduleDataList = new ArrayList<>();
     private List<String> keys = new ArrayList<>(); //방에 대한 키
     String broadcastStation; //방송사
     String scheduleDate; //방송일자
 
-    public ChatListAdapter(String broadcastStation, String scheduleDate) {
+    public BroadListAdapter(String broadcastStation, String scheduleDate) {
         this.broadcastStation =broadcastStation;
         this.scheduleDate = scheduleDate;
 
@@ -35,7 +34,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 tvScheduleDataList.clear();
-
                 for(DataSnapshot item : snapshot.getChildren()){
                     tvScheduleDataList.add(item.getValue(TvScheduleData.class));
                     keys.add(item.getKey()); //방에 대한 키
