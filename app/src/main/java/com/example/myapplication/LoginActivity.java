@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        /*
         //카카오톡 가입
         Button btnKakaoLogin = findViewById(R.id.btnLoginKakao);
         btnKakaoLogin.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+         */
     }
 
     public void loginUser(String email, String password) {
