@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.model.UserModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -107,30 +109,33 @@ public class SignUpWithGoogleActivity extends AppCompatActivity {
                     if (task.isSuccessful()) { //로그인 성공
                         Log.d(TAG, "signInWithCredential:success");
                         Toast.makeText(getApplicationContext(), "Authentication Success", Toast.LENGTH_LONG).show();
+
+                        //***********************USER DB저장 ***************************
+                        UserModel userModel = new UserModel();
+
                         FirebaseUser user = mAuth.getCurrentUser();
+                        userModel.setUid(user.getUid()); //Auth uid
+                        userModel.setEmail(user.getEmail()); //아이디(이메일)
+                        userModel.setNickName(user.getDisplayName()); //닉네임
+                        userModel.setLoginKind(user.getProviderData().get(1).getProviderId()); //로그인 유형
 
-                        //문서 ID를 지정하면 값이 중복 추가되지 않는다. 해당 ID로 값이 set되면 변경된 부분이 update된다
-                        Map<String, Object> userData = new HashMap<>();
-                        userData.put("id", user.getEmail());
-                        userData.put("nickname", user.getDisplayName());
-                        userData.put("loginKind", user.getProviderData().get(1).getProviderId());
-
-                        db.collection("member")
-                                .document(user.getEmail())
-                                .set(userData)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        //member아래 UID를 child 키로 user객체를 저장
+                        FirebaseDatabase.getInstance().getReference().child("member").child(user.getUid()).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        Log.d("FirebaseFirestore : ","Document ID : " + user.getEmail());
+                                        Log.d("FirebaseDatabase ::: ","회원가입성공 : " + user.getEmail());
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Log.d("FirebaseFirestore : ", "Document Error");
+                                        Log.d("FirebaseDatabase ::: ", "회원가입 데이터입력에러");
                                     }
                                 });
+
+                        //로그인 유무 체크
                         updateUI(user);
+
                     } else { //실패
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                         Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_LONG).show();
@@ -150,7 +155,7 @@ public class SignUpWithGoogleActivity extends AppCompatActivity {
 
     public void updateUI(FirebaseUser user) {
         if(user != null){
-            Log.d("로그인된 계정 : ", ""+mAuth.getCurrentUser().getEmail());
+            Log.d("로그인된 계정(이메일) : ", ""+mAuth.getCurrentUser().getEmail());
             Intent intent = new Intent(SignUpWithGoogleActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
