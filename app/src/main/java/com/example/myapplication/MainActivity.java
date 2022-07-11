@@ -2,11 +2,12 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.myapplication.fragment.BroadcastFragment;
+import com.example.myapplication.fragment.ChatRoomFragment;
 import com.example.myapplication.fragment.MainFragment;
 import com.example.myapplication.fragment.MyFragment;
 import com.example.myapplication.fragment.SearchFragment;

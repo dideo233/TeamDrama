@@ -14,11 +14,11 @@
         android:id="@+id/change"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/navigation_bar"
-        android:id="@+id/nav"/>
+        android:background="@color/light"
+        app:menu="@menu/navigation_bar" />
 
 </RelativeLayout>
