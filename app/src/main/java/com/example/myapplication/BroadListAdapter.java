@@ -1,5 +1,8 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +11,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.fragment.DetailsFragment;
 import com.example.myapplication.model.TvScheduleData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,6 +70,25 @@ public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.View
 
         holder.programname.setText(tvScheduleData.getTitle());
         holder.programep.setText(tvScheduleData.getTime());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Bundle bundle = new Bundle(); // 번들을 통해 값 전달
+                int PPosition = holder.getAdapterPosition();
+                bundle.putString("broadcastStation", broadcastStation);
+                bundle.putString("programname", tvScheduleDataList.get(PPosition).getTitle()); //번들에 넘길 값 저장
+                bundle.putString("Programca", tvScheduleDataList.get(PPosition).getCategory()); //번들에 넘길 값 저장
+                FragmentTransaction transaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
+                DetailsFragment programFrag = new DetailsFragment();//프래그먼트2 선언
+                programFrag.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
+                transaction.replace(R.id.change,programFrag);
+                transaction.commit();
+
+            }
+        });
+
     }
 
     @Override
@@ -74,13 +100,13 @@ public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.View
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView programname, programep;
-        ImageButton joinchat;
+        ImageButton programdetails;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             programname = itemView.findViewById(R.id.programname);
             programep = itemView.findViewById(R.id.programep);
-            joinchat = itemView.findViewById(R.id.joinchat);
+            programdetails = itemView.findViewById(R.id.prgramdetails);
         }
     }
 }

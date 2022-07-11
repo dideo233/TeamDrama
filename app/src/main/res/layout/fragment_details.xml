@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.DetailsFragment"
+    android:background="@color/dark"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_weight="4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/extrabold"
+            android:text="프로그램 명"
+            android:textColor="@color/light"
+            android:textSize="50dp" />
+
+        <ImageButton
+            android:id="@+id/like"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitEnd"
+            android:src="@drawable/lovee" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/broadcastStation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/regular"
+            android:text="방송사"
+            android:textColor="@color/light"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/extrabold"
+            android:text="|"
+            android:textColor="@color/light"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/regular"
+            android:text="장르"
+            android:textColor="@color/light"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btncreatechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_button"
+            android:text="채팅방 개설" />
+
+        <Button
+            android:id="@+id/btnchatclose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_button"
+            android:text="채팅방 닫기" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/extrabold"
+        android:text="인기있는 채팅방"
+        android:textColor="@color/light"
+        android:textSize="30dp" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@color/grey">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="1"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="55dp"
+                    android:textColor="@color/light"/>
+                <TextView
+                    android:id="@+id/chattop1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="채팅방 이름"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="25dp"
+                    android:textColor="@color/light"/>
+                <Button
+                    android:id="@+id/btnjoin1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_button"
+                    android:text="채팅방 참여" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@color/grey">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="2"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="55dp"
+                    android:textColor="@color/light"/>
+                <TextView
+                    android:id="@+id/chattop2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="채팅방 이름"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="25dp"
+                    android:textColor="@color/light"/>
+                <Button
+                    android:id="@+id/btnjoin2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_button"
+                    android:text="채팅방 참여" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@color/grey">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="3"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="55dp"
+                    android:textColor="@color/light"/>
+                <TextView
+                    android:id="@+id/chattop3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="채팅방 이름"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="25dp"
+                    android:textColor="@color/light"/>
+                <Button
+                    android:id="@+id/btnjoin3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_button"
+                    android:text="채팅방 참여" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@color/grey">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="4"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="55dp"
+                    android:textColor="@color/light"/>
+                <TextView
+                    android:id="@+id/chattop4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="채팅방 이름"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="25dp"
+                    android:textColor="@color/light"/>
+                <Button
+                    android:id="@+id/btnjoin4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_button"
+                    android:text="채팅방 참여" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:background="@color/grey">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="5"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="55dp"
+                    android:textColor="@color/light"/>
+                <TextView
+                    android:id="@+id/chattop5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="채팅방 이름"
+                    android:fontFamily="@font/extrabold"
+                    android:textSize="25dp"
+                    android:textColor="@color/light"/>
+                <Button
+                    android:id="@+id/btnjoin5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_button"
+                    android:text="채팅방 참여" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+</LinearLayout>
