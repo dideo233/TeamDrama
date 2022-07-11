@@ -76,11 +76,7 @@ public class SingUpActivity extends AppCompatActivity {
         });
     }
 
-    //id, pwd, pwdCheck 값 입력됐을 시
-    //* 1.기본적으로 firebase 회원가입 시 pwd는 6자 이상)
-    //* 2.email 형식 체크해주고, 중복 체크까지 해준다
-    //-> 이상한 이메일을 넣어도 가입되므로 유효한 이메일인지 처리가 필요함
-    //-> 회원가입 성공 및 각각의 실패 사례에 따른 처리 필요함
+    //회원가입
     private void signUp() {
         id= userId.getText().toString();
         pwd= userPwd.getText().toString();
@@ -179,9 +175,7 @@ public class SingUpActivity extends AppCompatActivity {
 
     //이메일 중복 확인 (가입 시)
     public void emailOverlapCheck(){
-
         id= userId.getText().toString();
-
         if(id.length() == 0){
             Toast.makeText(SingUpActivity.this, "이메일을 입력하세요." ,Toast.LENGTH_SHORT).show();
 
@@ -222,13 +216,11 @@ public class SingUpActivity extends AppCompatActivity {
                 btnSignupCheck.setEnabled(true);
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("중복확인 에러 : ", "error" + error.toString());
             }
         });
-
 
 //        DocumentReference docRef = db.collection("member").document(id);
 //        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -262,12 +254,7 @@ public class SingUpActivity extends AppCompatActivity {
     }
 
     //이메일 인증 (이메일 유효성 체크)
-    // -> 가입하고 나서 이메일 유효성 체크할 수 있도록 하는 듯.
-    // -> 대개의 서비스는 이메일 유효성 체크가 완료되었는지 확인하고 나서 제공하도록 구현.
-    // * 가입하면서 유효성 체크하도록 찾아보기 or 전화번호 가입 구현 생각해보기
     public void sendEmailVerification() {
-        // Send verification email
-        // [START send_email_verification]
         final FirebaseUser user = mAuth.getCurrentUser();
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
@@ -276,6 +263,5 @@ public class SingUpActivity extends AppCompatActivity {
                         // Email sent
                     }
                 });
-        // [END send_email_verification]
     }
 }

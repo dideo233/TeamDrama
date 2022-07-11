@@ -51,6 +51,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.0.1'
     implementation 'com.google.firebase:firebase-config'
 
+    //Kakao SDK
+    implementation "com.kakao.sdk:v2-user:2.8.3" // 카카오 로그인
+    implementation 'com.android.volley:volley:1.2.1'
+
     //Gson 파싱
     implementation 'com.google.code.gson:gson:2.9.0'
     //okhttp 통신
@@ -65,6 +69,4 @@ dependencies {
     //Jsoup
     implementation 'org.jsoup:jsoup:1.14.3'
 
-    //Kakao SDK
-    implementation "com.kakao.sdk:v2-user:2.8.3" // 카카오 로그인
 }

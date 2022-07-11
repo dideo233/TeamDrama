@@ -24,6 +24,7 @@ public class HashGetter {
                 keyHash = new String(Base64.encode(md.digest(), 0));
                 Log.d(TAG, keyHash);
             }
+            // 배포 시에는 디버그 키가 아닌 릴리즈 키 해시 값 등록할 것
         } catch (Exception e) {
             Log.e("name not found", e.toString());
         }

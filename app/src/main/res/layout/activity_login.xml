@@ -73,14 +73,14 @@
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
     <!--
-        <Button
+    <Button
         android:id="@+id/btnLoginKakao"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/kakao_login_large_wide"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/kakao_login_medium_wide"/>
     -->
-
 </LinearLayout>

@@ -94,14 +94,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         /*
         //카카오톡 가입
         Button btnKakaoLogin = findViewById(R.id.btnLoginKakao);
         btnKakaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SignUpWithKaKaoActiviry.class);
+                Intent intent = new Intent(getApplicationContext(), SignUpWithKaKaoActivity.class);
                 startActivity(intent);
             }
         });

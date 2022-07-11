@@ -123,6 +123,7 @@ public class MyFragment extends Fragment {
         ImageButton btnNickChange = (ImageButton)rootview.findViewById(R.id.nickChange);
         TextView nickname = (TextView)rootview.findViewById(R.id.tvnickname);
 
+        
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("member").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -146,8 +147,7 @@ public class MyFragment extends Fragment {
             }
         });
 
-
-        //로그아웃 (* 리스너?)
+        //로그아웃
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
