@@ -133,7 +133,7 @@ public class SignUpWithGoogleActivity extends AppCompatActivity {
                                     }
                                 });
 
-                        //로그인 유무 체크
+                        //메인화면전환
                         updateUI(user);
 
                     } else { //실패
