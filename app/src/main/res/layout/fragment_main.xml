@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/extrabold"
-            android:text="최신 채팅방"
+            android:text="시간대별 편성표"
             android:textColor="@color/light"
             android:textSize="30dp" />
 

@@ -57,8 +57,6 @@ import java.util.Map;
  */
 public class SignUpWithGoogleActivity extends AppCompatActivity {
     public static Context mContext;
-    //DB
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //인증
     private GoogleSignInClient mGoogleSignInClient;

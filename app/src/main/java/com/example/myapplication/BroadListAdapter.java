@@ -29,7 +29,7 @@ import java.util.List;
 public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.ViewHolder> {
 
     private List<TvScheduleData> tvScheduleDataList = new ArrayList<>();
-    private List<String> keys = new ArrayList<>(); //방에 대한 키
+    private List<String> tvScheduleKeyList = new ArrayList<>(); //방에 대한 키
     String broadcastStation; //방송사
     String scheduleDate; //방송일자
 
@@ -43,7 +43,7 @@ public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.View
                 tvScheduleDataList.clear();
                 for(DataSnapshot item : snapshot.getChildren()){
                     tvScheduleDataList.add(item.getValue(TvScheduleData.class));
-                    keys.add(item.getKey()); //방에 대한 키
+                    tvScheduleKeyList.add(item.getKey()); //방에 대한 키
                 }
                 notifyDataSetChanged();
             }
@@ -75,11 +75,13 @@ public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.View
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-                Bundle bundle = new Bundle(); // 번들을 통해 값 전달
+                // 번들을 통해 값 전달
+                Bundle bundle = new Bundle();
                 int PPosition = holder.getAdapterPosition();
-                bundle.putString("broadcastStation", broadcastStation);
-                bundle.putString("programname", tvScheduleDataList.get(PPosition).getTitle()); //번들에 넘길 값 저장
-                bundle.putString("Programca", tvScheduleDataList.get(PPosition).getCategory()); //번들에 넘길 값 저장
+                bundle.putString("broadcastStation", broadcastStation); //방송국
+                bundle.putString("programname", tvScheduleDataList.get(PPosition).getTitle()); //방송제목
+                bundle.putString("Programca", tvScheduleDataList.get(PPosition).getCategory()); //방송분류
+                bundle.putString("tvScheduleKey", tvScheduleKeyList.get(PPosition)); // 프로그램 키값
                 FragmentTransaction transaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
                 DetailsFragment programFrag = new DetailsFragment();//프래그먼트2 선언
                 programFrag.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비

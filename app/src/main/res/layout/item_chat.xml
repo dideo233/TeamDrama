@@ -5,41 +5,43 @@
     android:layout_height="70dp">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/chatitem_imageview" />
+
+    <TextView
+        android:id="@+id/chatitem_textview_roomType"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/chatitem_imageview"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:text="비공개"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
 
         <TextView
             android:id="@+id/chatitem_textview_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="방 이름"/>
+            android:text="방 이름"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/chatitem_textview_lastMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/chatitem_textview_title"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="10dp"
-            android:text="마지막 메시지"/>
-        <TextView
-            android:id="@+id/chatitem_textview_timestamp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/chatitem_textview_title"
-            android:layout_margin="10dp"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="10dp"
-            android:text="2011.11.11 11:11"/>
-    </RelativeLayout>
+            android:layout_marginTop="5dp"
+            android:text="마지막 메시지"
+            android:textColor="@android:color/darker_gray" />
+
+    </LinearLayout>
 
 </LinearLayout>

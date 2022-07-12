@@ -87,14 +87,14 @@
             android:background="@drawable/round_button"
             android:text="채팅방 개설" />
 
-        <Button
-            android:id="@+id/btnchatclose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/round_button"
-            android:text="채팅방 닫기" />
+<!--        <Button-->
+<!--            android:id="@+id/btnchatclose"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/round_button"-->
+<!--            android:text="채팅방 닫기" />-->
     </LinearLayout>
 
     <TextView

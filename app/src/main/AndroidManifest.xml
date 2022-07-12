@@ -23,7 +23,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".chat.ChatActivity"
+            android:name=".chat.GroupMessageActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpWithKaKaoActivity"
