@@ -9,7 +9,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +24,20 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.chat.GroupMessageActivity;
 import com.example.myapplication.model.ChatModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DetailsFragment extends Fragment {
     View view;
@@ -46,6 +55,8 @@ public class DetailsFragment extends Fragment {
 
     Button btncreatechat,btnchatclose,btnjoin1,btnjoin2,btnjoin3,btnjoin4,btnjoin5;
     TextView chattop1,chattop2,chattop3,chattop4,chattop5;
+
+    RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +84,10 @@ public class DetailsFragment extends Fragment {
             tvcategory.setText(Programca);
             tvbroadcastStation.setText(broadcastStation);
         }
+
+        //채팅방 리사이클러 뷰
+        recyclerView = view.findViewById(R.id.fragment_details_recyclerview);
+        recyclerView.setAdapter(new DetailRecyclerViewAdapter());
 
         //채팅방 개설버튼
         btncreatechat = view.findViewById(R.id.btncreatechat);
@@ -166,19 +181,108 @@ public class DetailsFragment extends Fragment {
                 dlg.show();
             }
         });
-        //btnchatclose = view.findViewById(R.id.btnchatclose);
-        btnjoin1 = view.findViewById(R.id.btnjoin1);
-        btnjoin2 = view.findViewById(R.id.btnjoin2);
-        btnjoin3 = view.findViewById(R.id.btnjoin3);
-        btnjoin4 = view.findViewById(R.id.btnjoin4);
-        btnjoin5 = view.findViewById(R.id.btnjoin5);
-        chattop1 = view.findViewById(R.id.chattop1);
-        chattop2 = view.findViewById(R.id.chattop2);
-        chattop3 = view.findViewById(R.id.chattop3);
-        chattop4 = view.findViewById(R.id.chattop4);
-        chattop5 = view.findViewById(R.id.chattop5);
-
         return view;
+    }
+
+    class DetailRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+        private List<ChatModel> chatModelList = new ArrayList<>(); //채팅방 리스트
+        private List<String> chatroomkeyList = new ArrayList<>(); //채팅방 리스트
+
+        public DetailRecyclerViewAdapter() {
+
+            //방송에 대한 채팅방 리스트를 가져옴
+            FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("tvScheduleKey").equalTo(tvScheduleKey)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot item : snapshot.getChildren()){
+                        ChatModel chatModel = item.getValue(ChatModel.class);
+                        chatModelList.add(chatModel);
+                        chatroomkeyList.add(item.getKey());
+                    }
+
+                    //정렬
+                    ChatModel temp1 = new ChatModel();
+                    String temp2;
+                    for(int i = 0; i<chatModelList.size(); i++) {
+                        for(int j = i+1; j<chatModelList.size(); j++) {
+                            if(chatModelList.get(i).users.size() < chatModelList.get(j).users.size()) {
+                                temp1 = chatModelList.get(i);
+                                chatModelList.add(i,chatModelList.get(j));
+                                chatModelList.add(j, temp1);
+
+                                temp2 = chatroomkeyList.get(i);
+                                chatroomkeyList.add(i, chatroomkeyList.get(j));
+                                chatroomkeyList.add(j, temp2);
+                            }
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_popular, parent, false);
+            return new CustomViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+            CustomViewHolder customViewHolder = (CustomViewHolder)holder;
+
+            customViewHolder.itemDetail_textview_rank.setText(Integer.toString(position+1)); //순위
+            customViewHolder.itemDetail_textview_title.setText(chatModelList.get(position).title); //채팅방 title
+
+            //채팅참가 버튼 클릭
+            customViewHolder.itemDetail_btn_chat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), GroupMessageActivity.class);
+                    String destinationRoom = chatroomkeyList.get(holder.getAdapterPosition());
+                    intent.putExtra("destinationRoom", destinationRoom); //방의 키값을 넘김
+
+                    //화면전환 애니메이션효과
+                    ActivityOptions activityOptions= null;
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        activityOptions = ActivityOptions.makeCustomAnimation(v.getContext(), R.anim.fromright, R.anim.toleft);
+                        startActivity(intent, activityOptions.toBundle());
+                    }
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return chatModelList ==null?0: chatModelList.size();
+        }
+
+        private class CustomViewHolder extends RecyclerView.ViewHolder {
+
+            TextView itemDetail_textview_rank;
+            TextView itemDetail_textview_title;
+            Button itemDetail_btn_chat;
+
+            public CustomViewHolder(View view) {
+                super(view);
+                itemDetail_textview_rank = view.findViewById(R.id.itemDetail_textview_rank);
+                itemDetail_textview_title = view.findViewById(R.id.itemDetail_textview_title);
+                itemDetail_btn_chat = view.findViewById(R.id.itemDetail_btn_chat);
+            }
+        }
+
     }
 
 

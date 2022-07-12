@@ -95,7 +95,6 @@ public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.View
 
     @Override
     public int getItemCount() {
-        Log.d("size:::::", tvScheduleDataList.size()+"");
         return tvScheduleDataList ==null?0: tvScheduleDataList.size();
     }
 
