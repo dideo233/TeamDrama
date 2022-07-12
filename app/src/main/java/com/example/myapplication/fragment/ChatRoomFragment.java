@@ -70,26 +70,7 @@ public class ChatRoomFragment extends Fragment {
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             //채팅방에 속한 user 중에 본인(uid)가 속한 채팅망 리스트를 가져옴
-//            FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    chatModelList.clear();
-//
-//                    for(DataSnapshot item : snapshot.getChildren()){
-//                        chatModelList.add(item.getValue(ChatModel.class)); //채팅방 객체
-//                        chatroomkeyList.add(item.getKey()); //방에 대한 키
-//                    }
-//                    notifyDataSetChanged();
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            });
-
-            //채팅방 전체리스트를 가져옴
-            FirebaseDatabase.getInstance().getReference().child("chatrooms").addValueEventListener(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     chatModelList.clear();
@@ -106,6 +87,25 @@ public class ChatRoomFragment extends Fragment {
 
                 }
             });
+
+//            //채팅방 전체리스트를 가져옴
+//            FirebaseDatabase.getInstance().getReference().child("chatrooms").addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    chatModelList.clear();
+//
+//                    for(DataSnapshot item : snapshot.getChildren()){
+//                        chatModelList.add(item.getValue(ChatModel.class)); //채팅방 객체
+//                        chatroomkeyList.add(item.getKey()); //방에 대한 키
+//                    }
+//                    notifyDataSetChanged();
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
         }
 
         @NonNull
