@@ -29,6 +29,7 @@ public class Crawler {
     Document html;
 
     String broadcastStation; //방송사
+//    String[] broadcastStations = {"1","3","5","7","11"};
     String scheduleDate; //방송일자
 
     Boolean check = false; //기존크롤링정보여부 체크
@@ -37,12 +38,79 @@ public class Crawler {
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
     public  void tvScheduleParse() {
+//        for(int i=0; i <broadcastStations.length;i++){
+//            int pos = i;
+//            Log.d("방송번호 !!!! ", broadcastStations[pos]); //방송사
+//            try {
+//
+//                html = conn
+//                        .header("Accept-Encodin","gzip, deflate, br")
+//                        .data("view_type","1")
+//                        .data("service_ch_no",broadcastStations[pos])//MBC Every1 (다른 방송국 편성 정보 파싱하려면 채널 번호만 바꾸기. ex:52 spoTV2 )
+//                        .data("ch_type","3")
+//                        .ignoreContentType(true).post();
+//
+//                Log.d("방송번호 ~~ ", broadcastStations[pos]);
+//                Elements timeH = html.select(".time:eq(0)");  //시
+//                Elements timeM = html.select(".time:eq(1)");  //분
+//                Elements program = html.select(".program");   //방송명
+//                Elements category = html.select(".category"); //장르
+//
+//                //방송사 구분
+//                broadcastStation = html.select("img").attr("alt");
+//                Log.d("방송사 !!! ", broadcastStation); //방송사
+//
+//                //날짜
+//                long now = System.currentTimeMillis();
+//                Date date = new Date(now);
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                scheduleDate = sdf.format(date);
+//
+//                //이미 데이터베이스에 크롤링 정보가 존재하는 경우에는 크롤링 데이터를 DB에 입력 생략
+//                database.child("broadcast").child(broadcastStation).child(scheduleDate).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        if (!snapshot.exists()) {
+//                            for (int i = 0; i < timeH.size(); i++) {
+//                                Log.d("time::: ", timeH.get(i).text() + ":" + timeM.get(i).text());
+//                                Log.d("program::: ", program.get(i).text());
+//                                Log.d("category::: ", category.get(i).text());
+//
+//                                //편성표 데이터를 TvScheduleData에 저장
+//                                TvScheduleData tvScheduleData = new TvScheduleData();
+//                                tvScheduleData.setTitle(program.get(i).text());
+//                                tvScheduleData.setCategory(category.get(i).text());
+//                                tvScheduleData.setTime(timeH.get(i).text() + ":" + timeM.get(i).text());
+//                                if (program.get(i).text().contains("방송중")) { //현재 방송 중인 프로그램
+//                                    String title = program.get(i).text();
+//                                    tvScheduleData.setTitle(title.substring(4, title.length()));
+//                                    tvScheduleData.setOnAir(true);
+//                                }
+//                                //데이터 베이스에 방송 1개씩 저장 (채팅방 개설을 위한 키값부여) push()를 써야 밀어넣어짐.
+//                                database.child("broadcast").child(broadcastStation).child(scheduleDate).push().setValue(tvScheduleData);
+//                            }
+//                        } else {
+//                            Log.d("편성표 존재여부>>>>", "해당일 편성표가 존재함");
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+//
+//            } catch (IOException e){
+//                e.printStackTrace();
+//            }
+//        }
         try {
 
             html = conn
                     .header("Accept-Encodin","gzip, deflate, br")
                     .data("view_type","1")
-                    .data("service_ch_no","1")//MBC Every1 (다른 방송국 편성 정보 파싱하려면 채널 번호만 바꾸기. ex:52 spoTV2 )
+                    .data("service_ch_no","11")//MBC Every1 (다른 방송국 편성 정보 파싱하려면 채널 번호만 바꾸기. ex:52 spoTV2 )
                     .data("ch_type","3")
                     .ignoreContentType(true).post();
 
@@ -70,12 +138,13 @@ public class Crawler {
                                     Log.d("time::: ", timeH.get(i).text() + ":" + timeM.get(i).text());
                                     Log.d("program::: ", program.get(i).text());
                                     Log.d("category::: ", category.get(i).text());
+                                    String Minutes = timeM.get(i).text().substring(0,2);
 
                                     //편성표 데이터를 TvScheduleData에 저장
                                     TvScheduleData tvScheduleData = new TvScheduleData();
                                     tvScheduleData.setTitle(program.get(i).text());
                                     tvScheduleData.setCategory(category.get(i).text());
-                                    tvScheduleData.setTime(timeH.get(i).text() + ":" + timeM.get(i).text());
+                                    tvScheduleData.setTime(timeH.get(i).text() + ":" + Minutes);
                                     if (program.get(i).text().contains("방송중")) { //현재 방송 중인 프로그램
                                         String title = program.get(i).text();
                                         tvScheduleData.setTitle(title.substring(4, title.length()));
