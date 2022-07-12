@@ -27,6 +27,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DetailsFragment extends Fragment {
     View view;
 
@@ -96,8 +99,15 @@ public class DetailsFragment extends Fragment {
                         }
 
                         ChatModel chatModel = new ChatModel();
-                        chatModel.title = title;
-                        chatModel.tvScheduleKey = tvScheduleKey;
+
+                        //날짜
+                        long now = System.currentTimeMillis();
+                        Date date = new Date(now);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        chatModel.openDate = sdf.format(date); //채팅방 오픈일자
+                        chatModel.tvScheduleTitle = tvtitle.getText().toString(); //방송 타이틀
+                        chatModel.title = title; //채팅방 제목
+                        chatModel.tvScheduleKey = tvScheduleKey; //채팅방 키
                         chatModel.roomType = "공개"; //채팅방 타입
                         chatModel.manager = myUid; //방장(채팅방개설자) uid
                         chatModel.users.put(myUid, true); //채팅참여자 방장 추가
@@ -127,7 +137,14 @@ public class DetailsFragment extends Fragment {
                         }
 
                         ChatModel chatModel = new ChatModel();
-                        chatModel.title = title;
+
+                        //날짜
+                        long now = System.currentTimeMillis();
+                        Date date = new Date(now);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        chatModel.openDate = sdf.format(date); //채팅방 오픈일자
+                        chatModel.tvScheduleTitle = tvtitle.getText().toString(); //방송 타이틀
+                        chatModel.title = title; //채팅방 제목
                         chatModel.tvScheduleKey = tvScheduleKey;
                         chatModel.roomType = "비공개"; //채팅방 타입
                         chatModel.manager = myUid; //방장(채팅방개설자) uid

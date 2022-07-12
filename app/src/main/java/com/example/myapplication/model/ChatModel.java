@@ -6,6 +6,8 @@ import java.util.Map;
 public class ChatModel {
 
     public String tvScheduleKey; //방송 키값
+    public String tvScheduleTitle; //방송 제목
+    public String openDate; // 오픈일자
     public String title; //채팅방 방제
     public String roomType; //채팅방 공개여부
     public String manager; //방장 uid

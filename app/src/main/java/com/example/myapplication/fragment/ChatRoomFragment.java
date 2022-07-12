@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -122,8 +123,18 @@ public class ChatRoomFragment extends Fragment {
             String destinationUid = null;
 
             //채팅방 타입
-            customViewHolder.textView_roomType.setText(chatModelList.get(position).roomType);
-            //방제목
+            if(chatModelList.get(position).roomType.equals("비공개")) {
+                customViewHolder.textView_roomType.setText(chatModelList.get(position).roomType);
+                customViewHolder.textView_roomType.setTextColor(Color.RED);
+            } else {
+                customViewHolder.textView_roomType.setText(chatModelList.get(position).roomType);
+            }
+
+            //채팅방 오픈일
+            customViewHolder.textView_openDate.setText(chatModelList.get(position).openDate);
+            //방송 타이틀
+            customViewHolder.textView_tvScheduleTitle.setText(chatModelList.get(position).tvScheduleTitle);
+            //채팅방 제목
             customViewHolder.textView_title.setText(chatModelList.get(position).title);
 
             //메시지를 내림차순으로 정렬후 마지막 메시지의 키값을 가져옴
@@ -165,6 +176,8 @@ public class ChatRoomFragment extends Fragment {
         private class CustomViewHolder extends RecyclerView.ViewHolder {
 
             public ImageView imageView;
+            public TextView textView_openDate;
+            public TextView textView_tvScheduleTitle;
             public TextView textView_roomType;
             public TextView textView_title;
             public TextView textView_last_message;
@@ -172,7 +185,9 @@ public class ChatRoomFragment extends Fragment {
             public CustomViewHolder(View view) {
                 super(view);
                 imageView = view.findViewById(R.id.chatitem_imageview);
+                textView_openDate = view.findViewById(R.id.chatitem_textview_openDate);
                 textView_roomType = view.findViewById(R.id.chatitem_textview_roomType);
+                textView_tvScheduleTitle = view.findViewById(R.id.chatitem_textview_tvScheduleTitle);
                 textView_title = view.findViewById(R.id.chatitem_textview_title);
                 textView_last_message = view.findViewById(R.id.chatitem_textview_lastMessage);
 

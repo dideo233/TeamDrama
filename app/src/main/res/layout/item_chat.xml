@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:layout_margin="5dp"
+        android:layout_margin="3dp"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:id="@+id/chatitem_imageview" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginRight="10dp">
 
     <TextView
         android:id="@+id/chatitem_textview_roomType"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="left"
         android:layout_margin="3dp"
         android:text="비공개"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="16dp" />
+    <TextView
+        android:id="@+id/chatitem_textview_openDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="3dp"
+        android:text="0000.00.00"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="16dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,11 +48,20 @@
         android:layout_gravity="center_vertical">
 
         <TextView
+            android:id="@+id/chatitem_textview_tvScheduleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="방송제목"
+            android:textColor="@android:color/holo_purple"
+            android:textSize="16dp" />
+
+        <TextView
             android:id="@+id/chatitem_textview_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="방 이름"
-            android:textSize="20dp" />
+            android:layout_marginTop="5dp"
+            android:text="채팅방 타이틀"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/chatitem_textview_lastMessage"
@@ -41,7 +71,10 @@
             android:layout_marginTop="5dp"
             android:text="마지막 메시지"
             android:textColor="@android:color/darker_gray" />
-
+        </LinearLayout>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/dark"/>
 </LinearLayout>

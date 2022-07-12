@@ -58,7 +58,7 @@ public class GroupMessageActivity extends AppCompatActivity {
     private ValueEventListener valueEventListener;
     private RecyclerView recyclerView;
 
-    List<ChatModel.Comment> commentList = new ArrayList<>();
+    List<ChatModel.Comment>  commentList = new ArrayList<>();
 
 
     @Override
@@ -88,11 +88,6 @@ public class GroupMessageActivity extends AppCompatActivity {
             }
         });
 
-        //방장이 아닌경우 채팅방 참여권한체크
-        if(!uid.equals(managerUid)) {
-            checkUser();
-        }
-
         //사용자 목록
         FirebaseDatabase.getInstance().getReference().child("member").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -106,7 +101,13 @@ public class GroupMessageActivity extends AppCompatActivity {
 
                 recyclerView = findViewById(R.id.groupMessageActivity_recyclerview);
                 recyclerView.setLayoutManager(new LinearLayoutManager(GroupMessageActivity.this));
-                recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
+
+                //방장이 아닌경우 채팅방 참여권한체크
+                if(!uid.equals(managerUid)) {
+                    checkUser();
+                } else {
+                    recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
+                }
 
             }
 
@@ -155,10 +156,12 @@ public class GroupMessageActivity extends AppCompatActivity {
                         if (!snapshot.exists()) { //채팅참여자 등록
                             //채팅방 타입에 따라 채팅참여자 초기권한 제한
                             if (chatModel.roomType.equals("공개")) { //채팅방이 공개인경우
+                                //채팅참여자 추가
                                 FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("users").child(uid).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                        Toast.makeText(getApplicationContext(), chatModel.title + "방에 오신것을 환영합니다.", Toast.LENGTH_SHORT).show();
+                                        recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
                                     }
                                 });
 
@@ -177,7 +180,21 @@ public class GroupMessageActivity extends AppCompatActivity {
                                         FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(getApplicationContext(), "채팅방 참여요청되었습니다.", Toast.LENGTH_SHORT).show();
+                                                FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("users").orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if(snapshot.exists()) {
+                                                            Toast.makeText(getApplicationContext(), "채팅방 참여가 수락되었습니다.", Toast.LENGTH_SHORT).show();
+                                                            recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
+                                                        }
+                                                    }
 
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
                                             }
                                         });
                                     }
@@ -192,6 +209,7 @@ public class GroupMessageActivity extends AppCompatActivity {
                             }
                         } else { //채팅참여대상인 경우
                             Toast.makeText(getApplicationContext(), chatModel.title + "방에 오신것을 환영합니다.", Toast.LENGTH_SHORT).show();
+                            recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
                         }
                     }
 

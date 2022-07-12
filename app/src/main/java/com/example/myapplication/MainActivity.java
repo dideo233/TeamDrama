@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.change, new MyFragment()).commit();
                         break;
                     case R.id.Seachpage:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.change, new SearchFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.change, new ChatRoomFragment()).commit();
                         break;
                 }
                 return true;
