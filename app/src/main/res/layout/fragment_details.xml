@@ -24,18 +24,9 @@
             android:fontFamily="@font/extrabold"
             android:text="프로그램 명"
             android:textColor="@color/light"
-            android:textSize="50dp" />
+            android:textSize="30dp" />
 
-        <ImageButton
-            android:id="@+id/like"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitEnd"
-            android:src="@drawable/lovee" />
+
     </LinearLayout>
 
 
@@ -72,6 +63,7 @@
             android:text="장르"
             android:textColor="@color/light"
             android:textSize="25dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -98,6 +90,16 @@
 <!--            android:layout_weight="1"-->
 <!--            android:background="@drawable/round_button"-->
 <!--            android:text="채팅방 닫기" />-->
+        <ImageButton
+            android:id="@+id/like"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:layout_margin="20dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitEnd"
+            android:src="@drawable/lovee" />
     </LinearLayout>
 
     <TextView
@@ -107,7 +109,7 @@
         android:fontFamily="@font/extrabold"
         android:text="인기있는 채팅방"
         android:textColor="@color/light"
-        android:textSize="30dp" />
+        android:textSize="25dp" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
