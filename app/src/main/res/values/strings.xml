@@ -3,7 +3,7 @@
     <string name="rc_color">splash_background</string>
 
     <string name="kakao_native_appKey">034b6914c28788c1f675ac00b751915f</string>
-    <string name="validation_server_domain">http://192.168.137.1:8000</string>
+    <string name="validation_server_domain">http://122.39.4.69:8000/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
