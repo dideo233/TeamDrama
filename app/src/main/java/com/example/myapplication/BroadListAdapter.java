@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.fragment.DetailsFragment;
+import com.example.myapplication.fragment.KbsFragment;
 import com.example.myapplication.model.TvScheduleData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,8 +30,9 @@ import java.util.List;
 
 public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.ViewHolder> {
 
-    private List<TvScheduleData> tvScheduleDataList = new ArrayList<>();
+    private ArrayList<TvScheduleData> tvScheduleDataList = new ArrayList<>();
     private List<String> tvScheduleKeyList = new ArrayList<>(); //방에 대한 키
+    ArrayList<TvScheduleData> original_list =new ArrayList<>();
     String broadcastStation; //방송사
     String scheduleDate; //방송일자
 
@@ -96,6 +99,15 @@ public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.View
     @Override
     public int getItemCount() {
         return tvScheduleDataList ==null?0: tvScheduleDataList.size();
+    }
+    public void setItems(ArrayList<TvScheduleData> list){
+        tvScheduleDataList = list;
+        notifyDataSetChanged();
+    }
+
+    public ArrayList<TvScheduleData> getTvScheduleDataList() {
+        notifyDataSetChanged();
+        return tvScheduleDataList;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

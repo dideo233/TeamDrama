@@ -39,11 +39,6 @@ public class MainFragment extends Fragment {
     private List<TvScheduleData> tvScheduleDataList = new ArrayList<>();
     private List<String> keys = new ArrayList<>();
 
-
-    String[] broadcastStations = {"KBS2","MBC","SBS","MBC Every1","tvN"};//방송사
-
-    String scheduleDate; //방송일자
-
     String todayDate;
 
     @Override
@@ -86,57 +81,13 @@ public class MainFragment extends Fragment {
         });
         tabLayoutMediator.attach();
 
-        TextView[] names = {
-                (TextView)view.findViewById(R.id.kpname),
-                (TextView)view.findViewById(R.id.mpname),
-                (TextView)view.findViewById(R.id.spname),
-                (TextView)view.findViewById(R.id.tpname),
-                (TextView)view.findViewById(R.id.mepname)
-        };
-        TextView[] starts = {
-                (TextView)view.findViewById(R.id.startk),
-                (TextView)view.findViewById(R.id.startm),
-                (TextView)view.findViewById(R.id.starts),
-                (TextView)view.findViewById(R.id.startt),
-                (TextView)view.findViewById(R.id.startme)
-        };
-
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdf2 = new SimpleDateFormat("MM월 dd일");
 
         todayDate = sdf2.format(date);
         tvtoday.setText(todayDate);
 
-        scheduleDate = sdf.format(date);
-        Log.d("scheduleDate>>>",""+scheduleDate );
-        for(int i=0; i <broadcastStations.length;i++){
-            int pos = i;
-            FirebaseDatabase.getInstance().getReference().child("broadcast").child(broadcastStations[i]).child(scheduleDate).orderByChild("onAir").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    for(DataSnapshot item : snapshot.getChildren()){
-                        names[pos].setText(item.getValue(TvScheduleData.class).getTitle());
-                        starts[pos].setText(item.getValue(TvScheduleData.class).getTime());
-
-                        Log.d("11",item.getValue(TvScheduleData.class).getTitle());
-                        Log.d("11",item.getValue(TvScheduleData.class).getTime());
-                        Log.d("11",item.getValue(TvScheduleData.class).getCategory());
-                        Log.d("11",item.getValue(TvScheduleData.class).isOnAir()+"");
-
-                    }
-
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
         return view;
     }
 

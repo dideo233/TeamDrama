@@ -83,12 +83,12 @@ public class Crawler {
 //                                Log.d("time::: ", i+">>>  "+ timeH.get(i).text() + ":" + timeM.get(i).text());
 //                                Log.d("program::: ", program.get(i).text());
 //                                Log.d("category::: ", category.get(i).text());
-
+                                    String starttime = timeH.get(i).text() + ":" + timeM.get(i).text().substring(0,2);
                                     //편성표 데이터를 TvScheduleData에 저장
                                     TvScheduleData tvScheduleData = new TvScheduleData();
                                     tvScheduleData.setTitle(program.get(i).text());
                                     tvScheduleData.setCategory(category.get(i).text());
-                                    tvScheduleData.setTime(timeH.get(i).text() + ":" + timeM.get(i).text());
+                                    tvScheduleData.setTime(starttime);
                                     if (program.get(i).text().contains("방송중")) { //현재 방송 중인 프로그램
                                         String title = program.get(i).text();
                                         tvScheduleData.setTitle(title.substring(4, title.length()));

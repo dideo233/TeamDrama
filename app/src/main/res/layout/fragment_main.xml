@@ -17,199 +17,6 @@
         android:layout_gravity="center"
         android:fontFamily="@font/extrabold"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/extrabold"
-            android:layout_gravity="center"
-            android:text=" 실시간"
-            android:textColor="@color/light"
-            android:textSize="30dp" />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_marginLeft="5dp"
-            android:scaleType="fitEnd"
-            android:layout_gravity="center"
-            android:src="@drawable/onairp" />
-    </LinearLayout>
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/kbs" />
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/kbs" />
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/kbs" />
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/kbs" />
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/kbs" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/startk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/extrabold"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/startm"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/starts"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/startt"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/startme"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/kpname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/mpname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/spname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/tpname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-                <TextView
-                    android:id="@+id/mepname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/extrabold"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="방송명"
-                    android:textColor="@color/light"
-                    android:textSize="25dp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/grey"/>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -239,7 +46,6 @@
             android:textColor="@color/light"
             android:textSize="30dp" />
     </LinearLayout>
-
 
 
     <com.google.android.material.tabs.TabLayout
@@ -283,6 +89,8 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
+    </androidx.viewpager2.widget.ViewPager2>
 
 </LinearLayout>
