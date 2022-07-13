@@ -1,10 +1,14 @@
 package com.example.myapplication.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserModel {
     private String uid; //auth uid
     private String email; //이메일
     private String nickName; //닉네임
     private String loginKind; //로그인 종류
+    public Map<String, Boolean> like = new HashMap<>(); //관심프로그램
 
     public String getUid() {
         return uid;

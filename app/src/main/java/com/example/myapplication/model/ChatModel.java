@@ -15,8 +15,10 @@ public class ChatModel {
     public Map<String, Comment> comments = new HashMap<>(); //채팅방의 대화내용
 
     public static class Comment {
-        public String uid;
-        public String message;
+        public String uid; //로그인한 사용자 uid
+        public String message; // 메시지 내용
+        public String type; //메시지 타입 - G:일반메시지, J:채팅참여, A:알람메시지
+        public String to; //상대방(귓말인 경우)
     }
 
 }

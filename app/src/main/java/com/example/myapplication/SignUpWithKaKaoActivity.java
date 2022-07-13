@@ -83,7 +83,7 @@ public class SignUpWithKaKaoActivity extends AppCompatActivity {
 
                                 UserModel userModel = new UserModel();
                                 userModel.setUid(user.getUid()); //Auth uid
-                                userModel.setEmail(user.getEmail()); //아이디(이메일)
+                                userModel.setEmail(user.getProviderData().get(0).getEmail()); //아이디(이메일)
                                 userModel.setNickName(user.getDisplayName()); //닉네임
                                 userModel.setLoginKind(user.getProviderData().get(0).getProviderId()); //로그인 유형
 
