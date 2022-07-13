@@ -26,23 +26,27 @@ public class SplashActivity extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
-    private Crawler crawler = new Crawler();
+
+    String[] channel = {"1", "3", "5", "7", "11"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        new Thread() {
-            public void run() {
-                try {
-                    Log.d("크롤러 실행 : ", "..");
-                    crawler.tvScheduleParse();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            new Thread() {
+                public void run() {
+                    try {
+                        Log.d("크롤러 실행 : ", "..");
+                        for(int i = 0;i<channel.length;i++) {
+                            Crawler crawler = new Crawler(channel[i]);
+                            crawler.tvScheduleParse();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }.start();
+            }.start();
 
         //상태바 없애기
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
