@@ -113,7 +113,7 @@ public class SignUpWithGoogleActivity extends AppCompatActivity {
 
                         FirebaseUser user = mAuth.getCurrentUser();
                         userModel.setUid(user.getUid()); //Auth uid
-                        userModel.setEmail(user.getEmail()); //아이디(이메일)
+                        userModel.setEmail(user.getProviderData().get(1).getEmail()); //아이디(이메일)
                         userModel.setNickName(user.getDisplayName()); //닉네임
                         userModel.setLoginKind(user.getProviderData().get(1).getProviderId()); //로그인 유형
 
