@@ -45,16 +45,14 @@ public class DetailsFragment extends Fragment {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
     String myUid = mAuth.getUid();
 
-    ImageButton like;
-
     TextView tvtitle,tvcategory,tvbroadcastStation;
     String programname;
     String Programca;
     String broadcastStation;
     String tvScheduleKey;
 
-    Button btncreatechat,btnchatclose,btnjoin1,btnjoin2,btnjoin3,btnjoin4,btnjoin5;
-    TextView chattop1,chattop2,chattop3,chattop4,chattop5;
+    Button btncreatechat; //채팅참여 버튼
+    ImageButton like; //관심등록 버튼
 
     RecyclerView recyclerView;
 
@@ -72,6 +70,7 @@ public class DetailsFragment extends Fragment {
         tvtitle = view.findViewById(R.id.title);
         tvcategory = view.findViewById(R.id.category);
         tvbroadcastStation = view.findViewById(R.id.broadcastStation);
+        like = view.findViewById(R.id.like);
 
         if (getArguments() != null)
         {
@@ -84,6 +83,44 @@ public class DetailsFragment extends Fragment {
             tvcategory.setText(Programca);
             tvbroadcastStation.setText(broadcastStation);
         }
+
+        //관심등록 여부체크
+        FirebaseDatabase.getInstance().getReference().child("member").child("uid").orderByChild("like").equalTo(tvScheduleKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    like.setImageResource(R.drawable.lovef);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //관심등록 버튼 클릭
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //관심등록 여부체크
+                FirebaseDatabase.getInstance().getReference().child("member").child("uid").orderByChild("like").equalTo(tvScheduleKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()) {
+                            FirebaseDatabase.getInstance().getReference().child("member").child("uid").child("like").setValue(null);
+                            like.setImageResource(R.drawable.lovee);
+                        } else {
+                            FirebaseDatabase.getInstance().getReference().child("member").child("uid").child("like").setValue(tvScheduleKey);
+                            like.setImageResource(R.drawable.lovef);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
 
         //채팅방 리사이클러 뷰
         recyclerView = view.findViewById(R.id.fragment_details_recyclerview);
