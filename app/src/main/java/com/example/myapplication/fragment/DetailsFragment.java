@@ -38,7 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class DetailsFragment extends Fragment {
     View view;
@@ -185,15 +184,7 @@ public class DetailsFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 //채팅방 개설알림
-                                long now = System.currentTimeMillis();
-                                Date date = new Date(now);
-                                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
-                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-
-                                NoticeData noticeData = new NoticeData();
-                                noticeData.setType("C"); //채팅방개설
-                                noticeData.setTime(sdf.format(date));
-                                noticeData.setMessage(chatModel.title + " 공개방 개설" );
+                                NoticeData noticeData = new NoticeData("C", chatModel.title + " 공개방 개설");
                                 FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("notice").push().setValue(noticeData);
 
                                 //화면전환 효과
@@ -235,15 +226,7 @@ public class DetailsFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 //채팅방 개설알림
-                                long now = System.currentTimeMillis();
-                                Date date = new Date(now);
-                                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
-                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-
-                                NoticeData noticeData = new NoticeData();
-                                noticeData.setType("C"); //채팅방개설
-                                noticeData.setTime(sdf.format(date));
-                                noticeData.setMessage(chatModel.title + " 비공개방 개설" );
+                                NoticeData noticeData = new NoticeData("C", chatModel.title + " 비공개방 개설");
                                 FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("notice").push().setValue(noticeData);
 
                                 //화면전환 효과
