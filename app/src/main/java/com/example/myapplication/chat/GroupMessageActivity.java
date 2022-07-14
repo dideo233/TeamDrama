@@ -355,13 +355,13 @@ public class GroupMessageActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             //채팅참여 요청수락 다이얼로그
-                            AlertDialog.Builder dlg = new AlertDialog.Builder(GroupMessageActivity.this);
-                            dlg.setTitle("[채팅방 참여요청]");
-                            dlg.setMessage("채팅방 참여를 수락하시겠습니까?");
-                            dlg.setPositiveButton("수락", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                            Dialog dlgChatJoinAgree = new Dialog(GroupMessageActivity.this);
+                            dlgChatJoinAgree.setContentView(R.layout.chat_join_agree);
+                            dlgChatJoinAgree.show();
 
+                            dlgChatJoinAgree.findViewById(R.id.btnAgree).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
                                     //채팅참여수락
                                     FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("users").child(commentList.get(holder.getAdapterPosition()).uid).setValue(true)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -380,17 +380,15 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                     noticeData.setMessage(chatModel.title + "채팅방 참여수락");
                                                     FirebaseDatabase.getInstance().getReference().child("member").child(commentList.get(holder.getAdapterPosition()).uid).child("notice").push().setValue(noticeData);
 
-                                                    //메시지 제거
-                                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("comments").child(commentKeyList.get(messageViewHolder.getAdapterPosition())).removeValue();
-                                                    commentList.remove(messageViewHolder.getAdapterPosition());
-                                                    recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
+                                                    dlgChatJoinAgree.dismiss();
+                                                    messageClear(messageViewHolder);
                                                 }
                                             });
                                 }
                             });
-                            dlg.setNegativeButton("거절", new DialogInterface.OnClickListener() {
+                            dlgChatJoinAgree.findViewById(R.id.btnRefusal).setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                                public void onClick(View view) {
                                     //채팅참여 거절
                                     FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("users").child(commentList.get(holder.getAdapterPosition()).uid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -400,9 +398,11 @@ public class GroupMessageActivity extends AppCompatActivity {
                                             }
                                         }
                                     });
+
+                                    dlgChatJoinAgree.dismiss();
+                                    messageClear(messageViewHolder);
                                 }
                             });
-                            dlg.create().show();
                         }
                     });
                 }
@@ -419,6 +419,13 @@ public class GroupMessageActivity extends AppCompatActivity {
                 messageViewHolder.messageItem_textView_message.setTextSize(20);
                 messageViewHolder.linearLayout_main.setGravity(Gravity.CENTER);
             }
+        }
+
+        public void messageClear(RecyclerView.ViewHolder messageViewHolder){
+            //메시지 제거
+            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("comments").child(commentKeyList.get(messageViewHolder.getAdapterPosition())).removeValue();
+            commentList.remove(messageViewHolder.getAdapterPosition());
+            recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
         }
 
         @Override
