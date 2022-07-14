@@ -214,7 +214,7 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                 noticeData.setTime(sdf.format(date));
                                                 noticeData.setType("C");
                                                 noticeData.setMessage("[참여요청]"+title.getText().toString());
-                                                FirebaseDatabase.getInstance().getReference().child("member").child(managerUid).child("notice").setValue(noticeData);
+                                                FirebaseDatabase.getInstance().getReference().child("member").child(managerUid).child("notice").push().setValue(noticeData);
 
                                                 Toast.makeText(getApplicationContext(), "채팅방 참여요청되었습니다.", Toast.LENGTH_SHORT).show();
                                                 FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("users").orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
