@@ -317,9 +317,12 @@ public class DetailsFragment extends Fragment {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
             CustomViewHolder customViewHolder = (CustomViewHolder)holder;
-
+            String chattitle = chatModelList.get(position).title;
+            if (chattitle.length() >= 5){
+                chattitle = chattitle.substring(0,6);
+            }
             customViewHolder.itemDetail_textview_rank.setText(Integer.toString(position+1)); //순위
-            customViewHolder.itemDetail_textview_title.setText(chatModelList.get(position).title); //채팅방 title
+            customViewHolder.itemDetail_textview_title.setText(chattitle); //채팅방 title
 
             //채팅참가 버튼 클릭
             customViewHolder.itemDetail_btn_chat.setOnClickListener(new View.OnClickListener() {

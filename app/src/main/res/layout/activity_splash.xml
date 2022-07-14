@@ -11,6 +11,7 @@
     tools:context=".SplashActivity">
 
     <ImageView
+        android:layout_marginLeft="7dp"
         android:layout_width="wrap_content"
         android:layout_height="415dp"
         android:src="@drawable/logo3" />
