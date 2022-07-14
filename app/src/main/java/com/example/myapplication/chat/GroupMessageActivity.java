@@ -205,8 +205,15 @@ public class GroupMessageActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 
-                                                //채팅방 참여요청 알림
-                                                NoticeData noticeData = new NoticeData("C", "[참여요청]"+title.getText().toString());
+                                                //채팅방 참여요청
+                                                long now = System.currentTimeMillis();
+                                                Date date = new Date(now);
+                                                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                                                NoticeData noticeData = new NoticeData();
+                                                noticeData.setTime(sdf.format(date));
+                                                noticeData.setType("C");
+                                                noticeData.setMessage("[참여요청]"+title.getText().toString());
                                                 FirebaseDatabase.getInstance().getReference().child("member").child(managerUid).child("notice").setValue(noticeData);
 
                                                 Toast.makeText(getApplicationContext(), "채팅방 참여요청되었습니다.", Toast.LENGTH_SHORT).show();
@@ -363,7 +370,14 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                     Toast.makeText(getApplicationContext(), "채팅참여 수락완료", Toast.LENGTH_SHORT).show();
 
                                                     //알림 - 채팅방 참여가능
-                                                    NoticeData noticeData = new NoticeData("J", chatModel.title + "채팅방 참여수락" );
+                                                    long now = System.currentTimeMillis();
+                                                    Date date = new Date(now);
+                                                    SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                                                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                                                    NoticeData noticeData = new NoticeData();
+                                                    noticeData.setTime(sdf.format(date));
+                                                    noticeData.setType("J");
+                                                    noticeData.setMessage(chatModel.title + "채팅방 참여수락");
                                                     FirebaseDatabase.getInstance().getReference().child("member").child(commentList.get(holder.getAdapterPosition()).uid).child("notice").push().setValue(noticeData);
                                                 }
                                             });
