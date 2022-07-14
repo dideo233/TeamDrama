@@ -1,12 +1,15 @@
 package com.example.myapplication.fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -291,7 +294,19 @@ public class MyFragment extends Fragment {
             customViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Context context = view.getContext();
+                    // 번들을 통해 값 전달
+                    Bundle bundle = new Bundle();
+                    int PPosition = holder.getAdapterPosition();
+                    bundle.putString("broadcastStation", myLikeList.get(PPosition).getBroadcastStation()); //방송국
+                    bundle.putString("programname",myLikeList.get(PPosition).getProgramname()); //방송제목
+                    bundle.putString("programca", myLikeList.get(PPosition).getProgramca()); //방송분류
+                    bundle.putString("tvScheduleKey", myLikeList.get(PPosition).getTvScheduleKey()); // 프로그램 키값
+                    FragmentTransaction transaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
+                    DetailsFragment programFrag = new DetailsFragment();//프래그먼트2 선언
+                    programFrag.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
+                    transaction.replace(R.id.change,programFrag);
+                    transaction.commit();
                 }
             });
 
