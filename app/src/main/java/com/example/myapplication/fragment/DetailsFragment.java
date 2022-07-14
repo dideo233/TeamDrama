@@ -154,14 +154,11 @@ public class DetailsFragment extends Fragment {
                 View dialogView = v.inflate(v.getContext(), R.layout.dialog_room, null);
 
                 EditText edt_title = dialogView.findViewById(R.id.edt_title);
-
                 AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
-                dlg.setTitle("채팅방개설");
                 dlg.setView(dialogView);
-                dlg.setPositiveButton("공개방개설", new DialogInterface.OnClickListener() {
+                dialogView.findViewById(R.id.btnPublicTitle).setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
+                    public void onClick(View view) {
                         String title = edt_title.getText().toString();
 
                         if(title==""){
@@ -207,12 +204,11 @@ public class DetailsFragment extends Fragment {
                                 }
                             }
                         });
-
                     }
                 });
-                dlg.setNegativeButton("비공개개설", new DialogInterface.OnClickListener() {
+                dialogView.findViewById(R.id.btnPrimaryTitle).setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(View view) {
                         String title = edt_title.getText().toString();
 
                         if(title==""){

@@ -25,7 +25,11 @@ import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 
@@ -44,6 +48,7 @@ import java.util.Map;
 //5.Firebase Auth에서 제공하는 signInWithCustomToken 메서드 인자로 custom token을 넘겨 로그인 처리
 public class SignUpWithKaKaoActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    //private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class SignUpWithKaKaoActivity extends AppCompatActivity {
     public void login(){
         String TAG = "login()";
         if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(SignUpWithKaKaoActivity.this)){ //카카오톡 로그인
+            //
             Log.d("kakao talk login ", "....");
         } else { //카카오 계정 로그인
             Log.d("kakao acount login ", "....");
@@ -66,6 +72,8 @@ public class SignUpWithKaKaoActivity extends AppCompatActivity {
                 } else if (oAuthToken != null) {
                     Log.i(TAG, "카카오록 로그인 성공(access token) : " + oAuthToken.getAccessToken());
                     Log.i(TAG, "firebase auth createing : " + "...");
+
+                    //DB 검색해서 있으면 로그인 리스너 실행시켜서 로그인시키도록 구현하기
                     //getUserInfo();
 
                     getFirebaseJwt(oAuthToken.getAccessToken()).continueWithTask(new Continuation<String, Task<AuthResult>>() {
@@ -118,13 +126,30 @@ public class SignUpWithKaKaoActivity extends AppCompatActivity {
 
     //카톡 로그인 유저 정보 확인
      public void getUserInfo(){
-        String TAG = "getUserInfo()";
-        UserApiClient.getInstance().me((user, meError) -> {
+         //databaseReference = FirebaseDatabase.getInstance().getReference();
+         String TAG = "getUserInfo()";
+         UserApiClient.getInstance().me((user, meError) -> {
             if (meError != null) {
                 Log.e(TAG, "사용자 정보 요청 실패", meError);
             } else {
-                System.out.println("로그인 완료");
+                Log.d("사용자 정보 동의 로그인 완료 ","리턴된 사용자 정보");
                 Log.i(TAG, user.toString());
+//                databaseReference.child("member").child("kakao:"+user.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        UserModel userData  = snapshot.getValue(UserModel.class);
+//                        if(userData == null) {
+//                            Log.d("미가입 유저 >> ", " 가입 진행");
+//                            return;
+//                        }
+//                        String uid = userData.getUid();
+//                        Log.d("이미 가입된 유저 :", uid);
+//                    }
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
             }
             return null;
         });
