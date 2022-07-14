@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -189,12 +190,13 @@ public class GroupMessageActivity extends AppCompatActivity {
 
                             } else if (chatModel.roomType.equals("비공개")) { //채팅방이 비공개인 경우
                                 //채팅방 참여 다이얼로그
-                                AlertDialog.Builder dlg = new AlertDialog.Builder(GroupMessageActivity.this);
-                                dlg.setTitle("채팅참여요청");
-                                dlg.setMessage("비공개 채팅방입니다. 채팅참여를 요청하시겠습니까?");
-                                dlg.setPositiveButton("요청", new DialogInterface.OnClickListener() {
+                                Dialog dlgChatJoin = new Dialog(GroupMessageActivity.this);
+                                dlgChatJoin.setContentView(R.layout.chat_join);
+                                dlgChatJoin.show();
+
+                                dlgChatJoin.findViewById(R.id.btnJoinPrimaryChat).setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    public void onClick(View view) {
                                         //메시지 입력
                                         ChatModel.Comment comment = new ChatModel.Comment();
                                         comment.type ="J"; //채팅참여요청 메시지
@@ -204,7 +206,6 @@ public class GroupMessageActivity extends AppCompatActivity {
                                         FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-
                                                 //채팅방 참여요청
                                                 long now = System.currentTimeMillis();
                                                 Date date = new Date(now);
@@ -217,6 +218,8 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                 FirebaseDatabase.getInstance().getReference().child("member").child(managerUid).child("notice").push().setValue(noticeData);
 
                                                 Toast.makeText(getApplicationContext(), "채팅방 참여요청되었습니다.", Toast.LENGTH_SHORT).show();
+                                                dlgChatJoin.dismiss();
+
                                                 FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("users").orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -227,23 +230,21 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                             recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
                                                         }
                                                     }
-
                                                     @Override
                                                     public void onCancelled(@NonNull DatabaseError error) {
-
                                                     }
                                                 });
                                             }
                                         });
                                     }
                                 });
-                                dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                dlgChatJoin.findViewById(R.id.btnJoinPrimaryChatCancel).setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    public void onClick(View view) {
+                                        dlgChatJoin.dismiss();
                                         finish();
                                     }
                                 });
-                                dlg.create().show();
                             }
                         } else { //채팅참여대상인 경우
                             Toast.makeText(getApplicationContext(), chatModel.title + "방에 오신것을 환영합니다.", Toast.LENGTH_SHORT).show();

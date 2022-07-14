@@ -2,12 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/dark">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/extrabold"
+            android:text="닉네임 수정"
+            android:textColor="@color/light"
+            android:textSize="30dp" />
 
         <EditText
             android:id="@+id/edtnick"
-            android:hint="5글자 이하로 입력하세요"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:gravity="left"
+            android:textSize="15dp"
+            android:hint="5글자 이하로 입력하세요"
+            android:background="@drawable/edit_test_style"
+            android:imeOptions="actionSearch"
+            android:inputType="text"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:gravity="center">
+                <Button
+                    android:id="@+id/btnModifyNick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/round_button"
+                    android:text="수정" />
+                <Button
+                    android:id="@+id/btnModifyCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/round_button"
+                    android:text="취소" />
+        </LinearLayout>
 </LinearLayout>

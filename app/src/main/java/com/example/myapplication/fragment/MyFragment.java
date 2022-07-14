@@ -148,18 +148,17 @@ public class MyFragment extends Fragment {
         //닉네임 수정 버튼
         btnNickChange.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                View dialogView = view.inflate(view.getContext(), R.layout.nick_change, null);
-
+            public void onClick(View view) {                View dialogView = view.inflate(view.getContext(), R.layout.nick_change, null);
                 EditText edtnick = dialogView.findViewById(R.id.edtnick);
 
                 android.app.AlertDialog.Builder dlg = new AlertDialog.Builder(view.getContext());
-                dlg.setTitle("닉네임 변경");
                 dlg.setView(dialogView);
-                dlg.setPositiveButton("변경", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                AlertDialog ad = dlg.create();
+                ad.show();
 
+                dialogView.findViewById(R.id.btnModifyNick).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                         String newnick = edtnick.getText().toString();
 
                         //database 업데이트는 해쉬맵형태로 (키값, 바꿀내용)
@@ -171,17 +170,19 @@ public class MyFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
                                 Log.d("닉네임변경", "Transaction success!");
                                 nickname.setText(newnick);
+                                ad.dismiss();
                             }
                         });
                     }
                 });
-                dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                dialogView.findViewById(R.id.btnModifyCancel).setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        return;
+                    public void onClick(View view) {
+                        ad.dismiss();
                     }
                 });
-                dlg.show();
+
+
             }
         });
         return rootview;

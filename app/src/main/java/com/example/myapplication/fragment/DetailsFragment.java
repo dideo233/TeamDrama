@@ -331,7 +331,6 @@ public class DetailsFragment extends Fragment {
                     Intent intent = new Intent(v.getContext(), GroupMessageActivity.class);
                     String destinationRoom = chatroomkeyList.get(holder.getAdapterPosition());
                     intent.putExtra("destinationRoom", destinationRoom); //방의 키값을 넘김
-
                     //화면전환 애니메이션효과
                     ActivityOptions activityOptions= null;
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
