@@ -58,8 +58,8 @@
         android:id="@+id/groupMessageActivity_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/groupMessageActivity_textview_linearlayout"
         android:layout_above="@+id/groupMessageActivity_button"
+        android:layout_below="@+id/groupMessageActivity_textview_linearlayout"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true" />
 
