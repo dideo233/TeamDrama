@@ -70,8 +70,11 @@ public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TvScheduleData tvScheduleData = tvScheduleDataList.get(position);
-
-        holder.programname.setText(tvScheduleData.getTitle());
+        String tvnamesub = tvScheduleData.getTitle();
+        if (tvnamesub.length() >= 20){
+            tvnamesub=tvnamesub.substring(0,17)+"...";
+        }
+        holder.programname.setText(tvnamesub);
         holder.programep.setText(tvScheduleData.getTime());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

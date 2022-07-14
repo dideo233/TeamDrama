@@ -8,15 +8,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="5dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:visibility="invisible"
-            android:src="@drawable/onair"
-            android:adjustViewBounds="true"
-            android:layout_marginRight="20dp"
-            android:scaleType="fitEnd"
-            android:id="@+id/onair"/>
+
 
         <TextView
             android:id="@+id/programep"
