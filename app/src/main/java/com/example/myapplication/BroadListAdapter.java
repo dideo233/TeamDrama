@@ -82,8 +82,9 @@ public class BroadListAdapter extends RecyclerView.Adapter<BroadListAdapter.View
                 Bundle bundle = new Bundle();
                 int PPosition = holder.getAdapterPosition();
                 bundle.putString("broadcastStation", broadcastStation); //방송국
+                bundle.putString("scheduleDate", scheduleDate); //방송일자
                 bundle.putString("programname", tvScheduleDataList.get(PPosition).getTitle()); //방송제목
-                bundle.putString("Programca", tvScheduleDataList.get(PPosition).getCategory()); //방송분류
+                bundle.putString("programca", tvScheduleDataList.get(PPosition).getCategory()); //방송분류
                 bundle.putString("tvScheduleKey", tvScheduleKeyList.get(PPosition)); // 프로그램 키값
                 FragmentTransaction transaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
                 DetailsFragment programFrag = new DetailsFragment();//프래그먼트2 선언

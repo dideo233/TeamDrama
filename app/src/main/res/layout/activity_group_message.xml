@@ -5,17 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chat.GroupMessageActivity">
+    <LinearLayout
+        android:id="@+id/groupMessageActivity_textview_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/dark"
+        android:gravity="center"
+        >
+    <TextView
+        android:id="@+id/groupMessageActivity_textview_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/light"
+        android:text="방제"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_margin="2dp"
+        android:fontFamily="@font/extrabold"/>
+    <TextView
+        android:id="@+id/groupMessageActivity_textview_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pink"
+        android:layout_margin="2dp"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:fontFamily="@font/extrabold"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/groupMessageActivity_editText"
-        android:layout_alignBaseline="@id/groupMessageActivity_button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/groupMessageActivity_button"
-        android:layout_toStartOf="@+id/groupMessageActivity_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/groupMessageActivity_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/groupMessageActivity_button"
+        android:layout_toLeftOf="@+id/groupMessageActivity_button" />
 
     <Button
         android:id="@+id/groupMessageActivity_button"
@@ -30,8 +58,9 @@
         android:id="@+id/groupMessageActivity_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/groupMessageActivity_textview_linearlayout"
         android:layout_above="@+id/groupMessageActivity_button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>

@@ -9,10 +9,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +24,8 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.chat.GroupMessageActivity;
 import com.example.myapplication.model.ChatModel;
+import com.example.myapplication.model.LikeTvScheduleData;
+import com.example.myapplication.model.NoticeData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,18 +38,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class DetailsFragment extends Fragment {
     View view;
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String myUid = mAuth.getUid();
 
     TextView tvtitle,tvcategory,tvbroadcastStation;
-    String programname;
-    String Programca;
-    String broadcastStation;
-    String tvScheduleKey;
+    String programname; //방송 타이틀
+    String programca; //방송분류
+    String broadcastStation; //방송국
+    String scheduleDate; //방송일자
+    String tvScheduleKey; //방송 키값
 
     Button btncreatechat; //채팅참여 버튼
     ImageButton like; //관심등록 버튼
@@ -74,22 +76,24 @@ public class DetailsFragment extends Fragment {
 
         if (getArguments() != null)
         {
+            broadcastStation = getArguments().getString("broadcastStation"); //방송국
+            scheduleDate = getArguments().getString("scheduleDate"); //방송일자
             programname = getArguments().getString("programname"); // 프래그먼트1에서 받아온 값 넣기
-            Programca = getArguments().getString("Programca");
-            broadcastStation = getArguments().getString("broadcastStation");
+            programca = getArguments().getString("programca");
             tvScheduleKey = getArguments().getString("tvScheduleKey");
 
             tvtitle.setText(programname);
-            tvcategory.setText(Programca);
+            tvcategory.setText(programca);
             tvbroadcastStation.setText(broadcastStation);
         }
 
         //관심등록 여부체크
-        FirebaseDatabase.getInstance().getReference().child("member").child("uid").orderByChild("like").equalTo(tvScheduleKey).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("like").child(tvScheduleKey)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
-                    like.setImageResource(R.drawable.lovef);
+                   like.setImageResource(R.drawable.lovef);
                 }
             }
             @Override
@@ -98,22 +102,37 @@ public class DetailsFragment extends Fragment {
             }
         });
 
-        //관심등록 버튼 클릭
+        //관심등록  버튼 클릭
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //관심등록 여부체크
-                FirebaseDatabase.getInstance().getReference().child("member").child("uid").orderByChild("like").equalTo(tvScheduleKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("like").child(tvScheduleKey)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()) {
-                            FirebaseDatabase.getInstance().getReference().child("member").child("uid").child("like").setValue(null);
+                        if(snapshot.exists()) { //기존에 존재하면
+                            //관심등록 삭제
                             like.setImageResource(R.drawable.lovee);
+                            FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("like").child(tvScheduleKey).removeValue();
                         } else {
-                            FirebaseDatabase.getInstance().getReference().child("member").child("uid").child("like").setValue(tvScheduleKey);
-                            like.setImageResource(R.drawable.lovef);
+                            //관심등록 추가
+                            LikeTvScheduleData likeTvScheduleData = new LikeTvScheduleData();
+                            likeTvScheduleData.setTvScheduleKey(tvScheduleKey);
+                            likeTvScheduleData.setBroadcastStation(broadcastStation);
+                            likeTvScheduleData.setScheduleDate(scheduleDate);
+                            likeTvScheduleData.setProgramname(programname);
+                            likeTvScheduleData.setProgramca(programca);
+                            FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("like").child(tvScheduleKey).setValue(likeTvScheduleData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    like.setImageResource(R.drawable.lovef);
+                                }
+                            });
                         }
+
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -167,6 +186,19 @@ public class DetailsFragment extends Fragment {
                         FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+
+                                //채팅방 개설알림
+                                long now = System.currentTimeMillis();
+                                Date date = new Date(now);
+                                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+
+                                NoticeData noticeData = new NoticeData();
+                                noticeData.setType("C"); //채팅방개설
+                                noticeData.setTime(sdf.format(date));
+                                noticeData.setMessage(chatModel.title + " 공개방 개설" );
+                                FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("notice").push().setValue(noticeData);
+
                                 //화면전환 효과
                                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                     Intent intent = new Intent(getContext(), MainActivity.class);
@@ -205,6 +237,19 @@ public class DetailsFragment extends Fragment {
                         FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+
+                                //채팅방 개설알림
+                                long now = System.currentTimeMillis();
+                                Date date = new Date(now);
+                                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+
+                                NoticeData noticeData = new NoticeData();
+                                noticeData.setType("C"); //채팅방개설
+                                noticeData.setTime(sdf.format(date));
+                                noticeData.setMessage(chatModel.title + " 비공개방 개설" );
+                                FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("notice").push().setValue(noticeData);
+
                                 //화면전환 효과
                                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                                     Intent intent = new Intent(getContext(), MainActivity.class);
@@ -224,7 +269,7 @@ public class DetailsFragment extends Fragment {
     class DetailRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         private List<ChatModel> chatModelList = new ArrayList<>(); //채팅방 리스트
-        private List<String> chatroomkeyList = new ArrayList<>(); //채팅방 리스트
+        private List<String> chatroomkeyList = new ArrayList<>(); //채팅방 키 리스트
 
         public DetailRecyclerViewAdapter() {
 

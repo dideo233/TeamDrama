@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,21 +25,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.Map;
 
 public class SingUpActivity extends AppCompatActivity {
-    //DB
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     //인증
-    private static final String TAG = "EmailPassword";
     private FirebaseAuth mAuth;
 
     //Button
@@ -184,7 +172,7 @@ public class SingUpActivity extends AppCompatActivity {
             return;
         }
 
-        FirebaseDatabase.getInstance().getReference().child("member").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("member").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot item : snapshot.getChildren()) {
@@ -221,36 +209,6 @@ public class SingUpActivity extends AppCompatActivity {
                 Log.d("중복확인 에러 : ", "error" + error.toString());
             }
         });
-
-//        DocumentReference docRef = db.collection("member").document(id);
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if(task.isSuccessful()){
-//                    DocumentSnapshot document = task.getResult();
-//                    if(document.exists()){//이미 존재하는 이메일
-//                        Log.d("select : ", ""+document.getData());
-//                        //Toast.makeText(SingUpActivity.this, "이미 사용 중인 이메일입니다" ,Toast.LENGTH_SHORT).show();
-//                        LayoutInflater inflater = getLayoutInflater();
-//                        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
-//
-//                        TextView text = (TextView) layout.findViewById(R.id.text);
-//                        text.setText("이미 사용 중인 이메일입니다");
-//
-//                        Toast toast = new Toast(getApplicationContext());
-//                        toast.setDuration(Toast.LENGTH_SHORT);
-//                        toast.setView(layout);
-//                        toast.show();
-//                    } else { //사용 가능 이메일
-//                        Log.d("select : ", "no such document");
-//                        //Toast.makeText(SingUpActivity.this, "사용 가능한 이메일입니다" ,Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                } else {
-//                    Log.d("get failed : ", ""+task.getException());
-//                }
-//            }
-//        });
     }
 
     //이메일 인증 (이메일 유효성 체크)
