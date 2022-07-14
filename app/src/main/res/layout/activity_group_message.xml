@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.GroupMessageActivity">
+    tools:context=".chat.GroupMessageActivity"
+    android:background="@color/light">
     <LinearLayout
         android:id="@+id/groupMessageActivity_textview_linearlayout"
         android:layout_width="match_parent"
@@ -37,23 +38,28 @@
     <EditText
         android:id="@+id/groupMessageActivity_editText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignBaseline="@id/groupMessageActivity_button"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_toStartOf="@+id/groupMessageActivity_button"
-        android:layout_toLeftOf="@+id/groupMessageActivity_button" />
+        android:layout_toLeftOf="@+id/groupMessageActivity_button"
+        android:background="@drawable/edit_test_style" />
 
     <Button
+        android:background="@drawable/round_button"
         android:id="@+id/groupMessageActivity_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
         android:text="보내기"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupMessageActivity_recyclerview"
         android:layout_width="match_parent"

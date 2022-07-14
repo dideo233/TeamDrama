@@ -103,10 +103,10 @@ public class KbsFragment extends Fragment {
 
         return viewkbs;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        editText.setText("");
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        editText.setText("");
+//    }
 
 }

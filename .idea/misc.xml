@@ -10,7 +10,7 @@
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/font/font.xml" value="0.2712962962962963" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_chat.xml" value="0.30055579307396324" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_firtst_main.xml" value="0.18255664814023087" />
-        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_group_message.xml" value="0.18255664814023087" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_group_message.xml" value="0.25" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_login2.xml" value="0.30055579307396324" />
@@ -22,21 +22,31 @@
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_signup.xml" value="0.30055579307396324" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_sing_up.xml" value="0.24796010879419764" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/activity_splash.xml" value="0.30055579307396324" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/chat_join.xml" value="0.22529465095194923" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/dialog_comment.xml" value="0.22529465095194923" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/dialog_room.xml" value="0.22529465095194923" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_account.xml" value="0.22529465095194923" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_chat.xml" value="0.30055579307396324" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_details.xml" value="0.21889696451474988" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_kbs.xml" value="0.1" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_main.xml" value="0.25" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_mbc.xml" value="0.16802052159042324" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_mbcevery.xml" value="0.1" />
-        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_my.xml" value="0.22" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_my.xml" value="0.25" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_people.xml" value="0.21889696451474988" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_sbs.xml" value="0.16802052159042324" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_tvn.xml" value="0.16802052159042324" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/fragment_tvschedule.xml" value="0.30055579307396324" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/item_broadcast.xml" value="0.19025224454895254" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/item_chat.xml" value="0.19025224454895254" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/item_detail_popular.xml" value="0.5" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/item_friend_select.xml" value="0.18255664814023087" />
-        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/item_message.xml" value="0.18255664814023087" />
-        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/mainchatlist.xml" value="0.44646464646464645" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/item_like.xml" value="0.30055579307396324" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/item_message.xml" value="0.25" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/item_notice.xml" value="0.30055579307396324" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/mainchatlist.xml" value="0.3148936170212766" />
+        <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/nick_change.xml" value="0.30055579307396324" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/register.xml" value="0.23300090661831369" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/row_chat.xml" value="0.18255664814023087" />
         <entry key="..\:/Android_Project/TeamDrama/app/src/main/res/layout/toast_layout.xml" value="0.24342701722574797" />
@@ -48,35 +58,6 @@
         <entry key="..\:/Users/admin/Desktop/TeamDrama/app/src/main/res/layout/activity_sign_up_with_ka_kao_activiry.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/admin/Desktop/TeamDrama/app/src/main/res/layout/activity_signup.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/admin/Desktop/TeamDrama/app/src/main/res/layout/activity_sing_up.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_chat.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_firtst_main.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_group_message.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_main.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_message.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_select_friend.xml" value="0.16032608695652173" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_sing_up.xml" value="0.16032608695652173" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/activity_splash.xml" value="0.2" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/chat_join.xml" value="0.31521739130434784" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/dialog_comment.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/dialog_room.xml" value="0.25" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_account.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_chat.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_details.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_kbs.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_mbc.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_mbcevery.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_my.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_search.xml" value="0.16923076923076924" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_tvn.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/fragment_tvschedule.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/item_broadcast.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/item_detail_popular.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/item_notice.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/mainchatlist.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/nick_change.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/row_chat.xml" value="0.1875" />
-        <entry key="..\:/Users/admin/Documents/GitHub/TeamDrama/app/src/main/res/layout/toast_layout.xml" value="0.1875" />
         <entry key="..\:/Users/usser/Desktop/TeamDrama/app/src/main/res/layout/activity_login.xml" value="0.21603260869565216" />
         <entry key="..\:/Users/usser/Desktop/TeamDrama/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/usser/Desktop/TeamDrama/app/src/main/res/layout/activity_main2.xml" value="0.358695652173913" />

@@ -72,7 +72,7 @@ public class MyFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_my, container, false);
         Button btnLogout = (Button) rootview.findViewById(R.id.btnLogout);
         Button btnSignout = (Button) rootview.findViewById(R.id.btnSignout);
-        Button btnNoticeRemove = rootview.findViewById(R.id.fragmentmy_button_noticeRemove);
+        ImageButton btnNoticeRemove = rootview.findViewById(R.id.fragmentmy_button_noticeRemove);
         ImageButton btnNickChange = (ImageButton) rootview.findViewById(R.id.nickChange);
         TextView nickname = (TextView) rootview.findViewById(R.id.tvnickname);
 
@@ -290,8 +290,12 @@ public class MyFragment extends Fragment {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             CustomViewHolder customViewHolder = (CustomViewHolder) holder;
 
+            String likenamesub = myLikeList.get(position).getProgramname();
+            if (likenamesub.length() >16){
+                likenamesub=likenamesub.substring(0,15)+"...";
+            }
             customViewHolder.likeItem_textview_info.setText(myLikeList.get(position).getBroadcastStation());
-            customViewHolder.likeItem_textview_title.setText(myLikeList.get(position).getProgramname());
+            customViewHolder.likeItem_textview_title.setText(likenamesub);
 
             customViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

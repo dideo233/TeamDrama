@@ -98,9 +98,9 @@ public class MbceveryFragment extends Fragment {
 
         return viewme;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        editText.setText("");
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        editText.setText("");
+//    }
 }

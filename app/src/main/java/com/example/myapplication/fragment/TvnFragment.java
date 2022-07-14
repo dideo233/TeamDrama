@@ -98,9 +98,9 @@ public class TvnFragment extends Fragment {
 
         return viewtvn;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        editText.setText("");
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        editText.setText("");
+//    }
 }

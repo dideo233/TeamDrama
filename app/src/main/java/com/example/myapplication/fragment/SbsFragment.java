@@ -98,9 +98,9 @@ public class SbsFragment extends Fragment {
 
         return viewsbs;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        editText.setText("");
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        editText.setText("");
+//    }
 }

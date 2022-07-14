@@ -72,8 +72,6 @@ public class MbcFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // original_list.clear();
-                //    Log.d("original_list", original_list.size()+"");
                 String searchText = editText.getText().toString();
                 Log.d("searchText", searchText+"");
                 FirebaseDatabase.getInstance().getReference().child("broadcast").child(broadcastStation).child(scheduleDate).orderByChild("title").startAt(searchText).endAt(searchText+"\uf8ff").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -97,9 +95,4 @@ public class MbcFragment extends Fragment {
         return viewmbc;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        editText.setText("");
-    }
 }
