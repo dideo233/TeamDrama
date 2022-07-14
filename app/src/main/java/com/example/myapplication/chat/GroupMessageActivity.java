@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.ChatModel;
+import com.example.myapplication.model.NoticeData;
 import com.example.myapplication.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +40,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class GroupMessageActivity extends AppCompatActivity {
     Map<String,UserModel> members = new HashMap<>();
@@ -58,9 +60,6 @@ public class GroupMessageActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
     private RecyclerView recyclerView;
-
-    List<ChatModel.Comment>  commentList = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,13 +205,9 @@ public class GroupMessageActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 
-                                                //채팅요청알림
-                                                Map<String, String> notice = new HashMap<>();
-                                                long now = System.currentTimeMillis();
-                                                Date date = new Date(now);
-                                                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-                                                notice.put(sdf.format(date), "채팅방 개설 : "+title);
-                                                FirebaseDatabase.getInstance().getReference().child("member").child(managerUid).child("notice").setValue(notice);
+                                                //채팅방 참여요청 알림
+                                                NoticeData noticeData = new NoticeData("C", "[참여요청]"+title.getText().toString());
+                                                FirebaseDatabase.getInstance().getReference().child("member").child(managerUid).child("notice").setValue(noticeData);
 
                                                 Toast.makeText(getApplicationContext(), "채팅방 참여요청되었습니다.", Toast.LENGTH_SHORT).show();
                                                 FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("users").orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
@@ -221,6 +216,7 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                         if(snapshot.exists()) {
                                                             Toast.makeText(getApplicationContext(), "채팅방 참여가 수락되었습니다.", Toast.LENGTH_SHORT).show();
                                                             info.setText("채팅가능");
+                                                            //채팅 내용 표시
                                                             recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
                                                         }
                                                     }
@@ -245,6 +241,7 @@ public class GroupMessageActivity extends AppCompatActivity {
                         } else { //채팅참여대상인 경우
                             Toast.makeText(getApplicationContext(), chatModel.title + "방에 오신것을 환영합니다.", Toast.LENGTH_SHORT).show();
                             info.setText("채팅가능");
+                            //채팅 내용 표시
                             recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
                         }
                     }
@@ -257,6 +254,8 @@ public class GroupMessageActivity extends AppCompatActivity {
     }
 
     class GroupMessageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+        List<ChatModel.Comment>  commentList = new ArrayList<>();
 
         public GroupMessageRecyclerViewAdapter(){
             getMessageList();
@@ -307,9 +306,10 @@ public class GroupMessageActivity extends AppCompatActivity {
             GroupMessageViewHodler messageViewHolder = ((GroupMessageViewHodler) holder);
 
             //메시지 타입 - G:일반메시지, J:채팅참여, A:알람메시지
+            String messageType = commentList.get(position).type;
+
             //일반메시지
-            if(commentList.get(position).type.equals("G")) {
-                messageViewHolder.linearLayout_main.setBackgroundColor(Color.WHITE);
+            if(messageType.equals("G")) {
                 //내가보낸 메세지
                 if (commentList.get(position).uid.equals(uid)) {
                     if (commentList.get(position).uid.equals(managerUid)) { //방장 표시
@@ -335,8 +335,9 @@ public class GroupMessageActivity extends AppCompatActivity {
             }
 
             //채팅방 참여요청 메시지(방장한테만 보냄)
-            if(commentList.get(position).type.equals("J")) {
+            if(messageType.equals("J")) {
                 if (commentList.get(position).to.equals(uid)) { //채팅 상대방(방장)이 본인
+                    messageViewHolder.messageItem_textview_nickName.setText("");
                     messageViewHolder.linearLayout_main.setBackgroundColor(Color.GREEN);
                     messageViewHolder.linearLayout_destination.setVisibility(View.VISIBLE);
                     messageViewHolder.messageItem_textView_message.setText(commentList.get(position).message);
@@ -360,6 +361,10 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     Toast.makeText(getApplicationContext(), "채팅참여 수락완료", Toast.LENGTH_SHORT).show();
+
+                                                    //알림 - 채팅방 참여가능
+                                                    NoticeData noticeData = new NoticeData("J", chatModel.title + "채팅방 참여수락" );
+                                                    FirebaseDatabase.getInstance().getReference().child("member").child(commentList.get(holder.getAdapterPosition()).uid).child("notice").push().setValue(noticeData);
                                                 }
                                             });
                                 }
@@ -385,7 +390,7 @@ public class GroupMessageActivity extends AppCompatActivity {
             }
 
             //채팅방 알림 메시지(전체공지용)
-            if(commentList.get(position).type.equals("A")) {
+            if(messageType.equals("A")) {
                 messageViewHolder.linearLayout_main.setBackgroundColor(Color.BLUE);
                 messageViewHolder.messageItem_textview_nickName.setText("[알림]");
                 messageViewHolder.messageItem_textview_nickName.setTextColor(Color.RED);

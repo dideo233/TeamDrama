@@ -38,7 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class DetailsFragment extends Fragment {
     View view;
@@ -154,14 +153,11 @@ public class DetailsFragment extends Fragment {
                 View dialogView = v.inflate(v.getContext(), R.layout.dialog_room, null);
 
                 EditText edt_title = dialogView.findViewById(R.id.edt_title);
-
                 AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
-                dlg.setTitle("채팅방개설");
                 dlg.setView(dialogView);
-                dlg.setPositiveButton("공개방개설", new DialogInterface.OnClickListener() {
+                dialogView.findViewById(R.id.btnPublicTitle).setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
+                    public void onClick(View view) {
                         String title = edt_title.getText().toString();
 
                         if(title==""){
@@ -188,15 +184,7 @@ public class DetailsFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 //채팅방 개설알림
-                                long now = System.currentTimeMillis();
-                                Date date = new Date(now);
-                                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
-                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-
-                                NoticeData noticeData = new NoticeData();
-                                noticeData.setType("C"); //채팅방개설
-                                noticeData.setTime(sdf.format(date));
-                                noticeData.setMessage(chatModel.title + " 공개방 개설" );
+                                NoticeData noticeData = new NoticeData("C", chatModel.title + " 공개방 개설");
                                 FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("notice").push().setValue(noticeData);
 
                                 //화면전환 효과
@@ -207,12 +195,11 @@ public class DetailsFragment extends Fragment {
                                 }
                             }
                         });
-
                     }
                 });
-                dlg.setNegativeButton("비공개개설", new DialogInterface.OnClickListener() {
+                dialogView.findViewById(R.id.btnPrimaryTitle).setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(View view) {
                         String title = edt_title.getText().toString();
 
                         if(title==""){
@@ -239,15 +226,7 @@ public class DetailsFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 //채팅방 개설알림
-                                long now = System.currentTimeMillis();
-                                Date date = new Date(now);
-                                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
-                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-
-                                NoticeData noticeData = new NoticeData();
-                                noticeData.setType("C"); //채팅방개설
-                                noticeData.setTime(sdf.format(date));
-                                noticeData.setMessage(chatModel.title + " 비공개방 개설" );
+                                NoticeData noticeData = new NoticeData("C", chatModel.title + " 비공개방 개설");
                                 FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("notice").push().setValue(noticeData);
 
                                 //화면전환 효과
