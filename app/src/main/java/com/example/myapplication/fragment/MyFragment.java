@@ -139,6 +139,7 @@ public class MyFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(getContext(), "알림메시지 정리완료", Toast.LENGTH_SHORT).show();
+                        fragmentmy_recyclerview_notice.setAdapter(new MyNoticeRecyclerViewAdapter());
                     }
                 });
             }

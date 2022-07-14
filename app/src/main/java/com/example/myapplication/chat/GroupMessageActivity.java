@@ -181,9 +181,9 @@ public class GroupMessageActivity extends AppCompatActivity {
                                 FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("users").child(uid).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                       Toast.makeText(getApplicationContext(), chatModel.title + "방에 오신것을 환영합니다.", Toast.LENGTH_SHORT).show();
-                                       info.setText("채팅가능");
-                                       recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
+                                        Toast.makeText(getApplicationContext(), chatModel.title + "방에 오신것을 환영합니다.", Toast.LENGTH_SHORT).show();
+                                        info.setText("채팅가능");
+                                        recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
                                     }
                                 });
 
@@ -262,7 +262,8 @@ public class GroupMessageActivity extends AppCompatActivity {
 
     class GroupMessageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-        List<ChatModel.Comment>  commentList = new ArrayList<>();
+        List<ChatModel.Comment>  commentList = new ArrayList<>(); //메시지 리스트
+        List<String>  commentKeyList = new ArrayList<>(); //메시지 key 리스트
 
         public GroupMessageRecyclerViewAdapter(){
             getMessageList();
@@ -277,10 +278,8 @@ public class GroupMessageActivity extends AppCompatActivity {
                     commentList.clear();
                     for (DataSnapshot item : dataSnapshot.getChildren()) {
                         ChatModel.Comment comment = item.getValue(ChatModel.Comment.class);
-                        if(comment.type.equals("J") && !comment.to.equals(managerUid)){
-                            continue;
-                        }
                         commentList.add(comment);
+                        commentKeyList.add(item.getKey());
                     }
                     //메시지가 없는 경우
                     if(commentList.size() == 0){
@@ -351,7 +350,7 @@ public class GroupMessageActivity extends AppCompatActivity {
                     messageViewHolder.messageItem_textView_message.setTextSize(16);
                     messageViewHolder.linearLayout_main.setGravity(Gravity.CENTER);
 
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    messageViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             //채팅참여 요청수락 다이얼로그
@@ -379,6 +378,11 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                     noticeData.setType("J");
                                                     noticeData.setMessage(chatModel.title + "채팅방 참여수락");
                                                     FirebaseDatabase.getInstance().getReference().child("member").child(commentList.get(holder.getAdapterPosition()).uid).child("notice").push().setValue(noticeData);
+
+                                                    //메시지 제거
+                                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("comments").child(commentKeyList.get(messageViewHolder.getAdapterPosition())).removeValue();
+                                                    commentList.remove(messageViewHolder.getAdapterPosition());
+                                                    recyclerView.setAdapter(new GroupMessageRecyclerViewAdapter());
                                                 }
                                             });
                                 }
