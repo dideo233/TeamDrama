@@ -2,7 +2,6 @@ package com.example.myapplication.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -77,11 +76,17 @@ public class MyFragment extends Fragment {
         TextView nickname = (TextView) rootview.findViewById(R.id.tvnickname);
 
         fragmentmy_recyclerview_notice = rootview.findViewById(R.id.fragmentmy_recyclerview_notice);
-        fragmentmy_recyclerview_notice.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+        LinearLayoutManager layoutManager_notice = new LinearLayoutManager(inflater.getContext());
+        layoutManager_notice.setReverseLayout(true);
+        layoutManager_notice.setStackFromEnd(true);
+        fragmentmy_recyclerview_notice.setLayoutManager(layoutManager_notice);
         fragmentmy_recyclerview_notice.setAdapter(new MyNoticeRecyclerViewAdapter());
 
         fragmentmy_recyclerview_like = rootview.findViewById(R.id.fragmentmy_recyclerview_like);
-        fragmentmy_recyclerview_like.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+        LinearLayoutManager layoutManager_like= new LinearLayoutManager(inflater.getContext());
+        layoutManager_like.setReverseLayout(true);
+        layoutManager_like.setStackFromEnd(true);
+        fragmentmy_recyclerview_like.setLayoutManager(layoutManager_like);
         fragmentmy_recyclerview_like.setAdapter(new MyLikeRecyclerViewAdapter());
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
