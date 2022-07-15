@@ -11,9 +11,9 @@
     tools:context=".SplashActivity">
 
     <ImageView
-        android:layout_marginLeft="7dp"
-        android:layout_width="wrap_content"
-        android:layout_height="415dp"
-        android:src="@drawable/logo3" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/logo4" />
 
 </LinearLayout>

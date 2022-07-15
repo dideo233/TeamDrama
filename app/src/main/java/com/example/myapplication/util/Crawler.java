@@ -57,13 +57,17 @@ public class Crawler {
                 scheduleDate = sdf.format(date);
 
                 for (int i = 0; i < timeH.size(); i++) {
-                    String starttime = timeH.get(i).text() + ":" + timeM.get(i).text().substring(0,2);
-                    //편성표 데이터를 TvScheduleData에 저장
-                    TvScheduleData tvScheduleData = new TvScheduleData();
                     String title =program.get(i).text();
+                    if(title.contains("방송 시간이 아닙니다")) {
+                        continue;
+                    }
                     if(title.contains("%26amp;")) {
                         title = title.replace("%26amp;", "&");
                     }
+
+                    //편성표 데이터를 TvScheduleData에 저장
+                    TvScheduleData tvScheduleData = new TvScheduleData();
+                    String starttime = timeH.get(i).text() + ":" + timeM.get(i).text().substring(0,2);
                     tvScheduleData.setTitle(title);
                     tvScheduleData.setCategory(category.get(i).text());
                     tvScheduleData.setTime(starttime);

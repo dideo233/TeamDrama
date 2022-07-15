@@ -27,7 +27,7 @@
             android:layout_margin="5dp"
             android:background="@drawable/round_button"
             android:fontFamily="@font/extrabold"
-            android:text="승낙" />
+            android:text="수락" />
         <Button
             android:id="@+id/btnRefusal"
             android:layout_width="wrap_content"
