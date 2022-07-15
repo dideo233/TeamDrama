@@ -406,6 +406,8 @@ public class GroupMessageActivity extends AppCompatActivity {
                             });
                         }
                     });
+                } else {
+                    messageViewHolder.linearLayout_destination.setVisibility(View.INVISIBLE);
                 }
             }
 
