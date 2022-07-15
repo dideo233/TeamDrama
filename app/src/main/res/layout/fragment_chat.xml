@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragment.ChatRoomFragment"
     android:background="@color/dark">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textColor="@color/light"
+       android:layout_margin="20dp"
+       android:text="참여한 파티"
+       android:textSize="40dp"
+       android:layout_gravity="center"
+       android:fontFamily="@font/extrabold"/>
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-      android:id="@+id/chatfragment_recyclerview">
+      android:id="@+id/chatfragment_recyclerview"
+       android:layout_marginBottom="50dp"/>
 
-   </androidx.recyclerview.widget.RecyclerView>
-
-</FrameLayout>
+</LinearLayout>

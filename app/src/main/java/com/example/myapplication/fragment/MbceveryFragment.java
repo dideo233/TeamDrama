@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.myapplication.BroadListAdapter;
 import com.example.myapplication.R;
@@ -46,6 +47,7 @@ public class MbceveryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View viewme = inflater.inflate(R.layout.fragment_mbcevery, container, false);
         RecyclerView rvchat = (RecyclerView)viewme.findViewById(R.id.rvchat);
+        ImageButton searchDelte = viewme.findViewById(R.id.search_delete);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvchat.setLayoutManager(linearLayoutManager);
@@ -73,8 +75,13 @@ public class MbceveryFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // original_list.clear();
-                //    Log.d("original_list", original_list.size()+"");
+                searchDelte.setVisibility(View.VISIBLE);
+                searchDelte.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        editText.setText("");
+                    }
+                });
                 String searchText = editText.getText().toString();
                 Log.d("searchText", searchText+"");
                 FirebaseDatabase.getInstance().getReference().child("broadcast").child(broadcastStation).child(scheduleDate).orderByChild("title").startAt(searchText).endAt(searchText+"\uf8ff").addListenerForSingleValueEvent(new ValueEventListener() {

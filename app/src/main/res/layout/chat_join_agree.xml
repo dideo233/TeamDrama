@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="@font/extrabold"
-        android:text="채팅방 참여 요청을 수락하시겠습니까?"
+        android:text="파티 참여 요청을 수락하시겠습니까?"
         android:textColor="@color/light"
         android:textSize="17dp" />
 
@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/round_button"
+            android:fontFamily="@font/extrabold"
             android:text="승낙" />
         <Button
             android:id="@+id/btnRefusal"
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/round_button"
+            android:fontFamily="@font/extrabold"
             android:text="거부" />
     </LinearLayout>
 </LinearLayout>

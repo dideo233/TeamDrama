@@ -191,7 +191,7 @@ public class DetailsFragment extends Fragment {
                                 NoticeData noticeData = new NoticeData();
                                 noticeData.setTime(sdf.format(date));
                                 noticeData.setType("C");
-                                noticeData.setMessage("[방개설]"+ chatModel.title);
+                                noticeData.setMessage("[개최] "+ chatModel.title);
                                 FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("notice").push().setValue(noticeData);
 
                                 //화면전환 효과
@@ -240,7 +240,7 @@ public class DetailsFragment extends Fragment {
                                 NoticeData noticeData = new NoticeData();
                                 noticeData.setTime(sdf.format(date));
                                 noticeData.setType("C");
-                                noticeData.setMessage(chatModel.title + " 비공개방 개설");
+                                noticeData.setMessage("[개최] "+chatModel.title);
                                 FirebaseDatabase.getInstance().getReference().child("member").child(myUid).child("notice").push().setValue(noticeData);
 
                                 //화면전환 효과

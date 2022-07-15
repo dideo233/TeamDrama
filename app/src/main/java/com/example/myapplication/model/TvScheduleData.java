@@ -6,7 +6,6 @@ public class TvScheduleData {
     String time;
     String title;
     String category;
-    boolean onAir;
 
     public String getTitle() {
         return title;
@@ -32,11 +31,4 @@ public class TvScheduleData {
         this.category = category;
     }
 
-    public boolean isOnAir() {
-        return onAir;
-    }
-
-    public void setOnAir(boolean onAir) {
-        this.onAir = onAir;
-    }
 }

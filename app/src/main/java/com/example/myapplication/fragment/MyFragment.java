@@ -229,13 +229,18 @@ public class MyFragment extends Fragment {
             CustomViewHolder customViewHolder = (CustomViewHolder) holder;
 
             if(myNoticeList.get(position).getType().equals("C")){
-                customViewHolder.noticeitem_imageview.setImageResource(R.drawable.notice);
+                customViewHolder.noticeitem_imageview.setImageResource(R.drawable.bell);
             } else if(myNoticeList.get(position).getType().equals("J")){
-                customViewHolder.noticeitem_imageview.setImageResource(R.drawable.user_join);
+                customViewHolder.noticeitem_imageview.setImageResource(R.drawable.checked);
             }
 
             customViewHolder.noticeitem_textview_time.setText(myNoticeList.get(position).getTime());
-            customViewHolder.noticeitem_textview_message.setText(myNoticeList.get(position).getMessage());
+
+            String noticenamesub = myNoticeList.get(position).getMessage();
+            if (noticenamesub.length() >21){
+                noticenamesub=noticenamesub.substring(0,20)+"...";
+            }
+            customViewHolder.noticeitem_textview_message.setText(noticenamesub);
 
         }
 

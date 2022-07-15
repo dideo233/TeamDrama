@@ -104,9 +104,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragmentmy_recyclerview_notice"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
@@ -125,7 +125,8 @@
         android:id="@+id/fragmentmy_recyclerview_like"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="2"
+        android:layout_marginBottom="50dp"/>
 
 
 </LinearLayout>

@@ -10,7 +10,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:fontFamily="@font/extrabold"
-            android:text="채팅방 개설"
+            android:text="파티 주최"
             android:textColor="@color/light"
             android:textSize="30dp" />
 
@@ -22,7 +22,7 @@
             android:padding="10dp"
             android:gravity="left"
             android:textSize="15dp"
-            android:hint="빙제를 입력해주세요"
+            android:hint="파티 제목을 입력해주세요"
             android:background="@drawable/edit_test_style"
             android:imeOptions="actionSearch"
             android:inputType="text"/>
@@ -39,13 +39,15 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/round_button"
-                    android:text="비밀방 개설" />
+                    android:fontFamily="@font/extrabold"
+                    android:text="비공개 파티" />
                 <Button
                     android:id="@+id/btnPublicTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/round_button"
-                    android:text="공개방 개설" />
+                    android:fontFamily="@font/extrabold"
+                    android:text="공개 파티" />
         </LinearLayout>
 </LinearLayout>

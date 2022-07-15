@@ -59,7 +59,7 @@
                 android:layout_margin="10dp"
                 android:layout_gravity="center"
                 android:background="@drawable/round_button"
-                android:text="채팅방 참여" />
+                android:text="파티 참여" />
 
         </LinearLayout>
 

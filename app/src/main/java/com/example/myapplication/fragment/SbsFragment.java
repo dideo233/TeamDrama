@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -46,6 +47,7 @@ public class SbsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View viewsbs = inflater.inflate(R.layout.fragment_sbs, container, false);
         RecyclerView rvchat = (RecyclerView) viewsbs.findViewById(R.id.rvchat);
+        ImageButton searchDelte = viewsbs.findViewById(R.id.search_delete);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvchat.setLayoutManager(linearLayoutManager);
@@ -74,8 +76,13 @@ public class SbsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // original_list.clear();
-                //    Log.d("original_list", original_list.size()+"");
+                searchDelte.setVisibility(View.VISIBLE);
+                searchDelte.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        editText.setText("");
+                    }
+                });
                 String searchText = editText.getText().toString();
                 Log.d("searchText", searchText+"");
                 FirebaseDatabase.getInstance().getReference().child("broadcast").child(broadcastStation).child(scheduleDate).orderByChild("title").startAt(searchText).endAt(searchText+"\uf8ff").addListenerForSingleValueEvent(new ValueEventListener() {

@@ -8,8 +8,8 @@
     <item
         android:id="@+id/Seachpage"
         android:enabled="true"
-        android:icon="@drawable/comment"
-        android:title="CHAT" />
+        android:icon="@drawable/mirrorball"
+        android:title="Party" />
     <item
         android:id="@+id/Mypage"
         android:enabled="true"

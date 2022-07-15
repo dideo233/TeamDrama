@@ -32,7 +32,7 @@
             android:layout_weight="4"
             android:text="프로그램 명"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/prgramdetails"
             android:layout_height="25dp"
             android:layout_width="wrap_content"

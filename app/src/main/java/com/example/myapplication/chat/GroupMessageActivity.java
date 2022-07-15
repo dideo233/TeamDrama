@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -345,7 +346,7 @@ public class GroupMessageActivity extends AppCompatActivity {
             if(messageType.equals("J")) {
                 if (commentList.get(position).to.equals(uid)) { //채팅 상대방(방장)이 본인
                     messageViewHolder.messageItem_textview_nickName.setText("");
-                    messageViewHolder.linearLayout_main.setBackgroundColor(Color.GREEN);
+                    messageViewHolder.linearLayout_main.setBackgroundColor(Color.parseColor("#E96467"));
                     messageViewHolder.linearLayout_destination.setVisibility(View.VISIBLE);
                     messageViewHolder.messageItem_textView_message.setText(commentList.get(position).message);
                     messageViewHolder.messageItem_textView_message.setTextSize(16);
@@ -377,7 +378,7 @@ public class GroupMessageActivity extends AppCompatActivity {
                                                     NoticeData noticeData = new NoticeData();
                                                     noticeData.setTime(sdf.format(date));
                                                     noticeData.setType("J");
-                                                    noticeData.setMessage(chatModel.title + "채팅방 참여수락");
+                                                    noticeData.setMessage("[수락] "+chatModel.title);
                                                     FirebaseDatabase.getInstance().getReference().child("member").child(commentList.get(holder.getAdapterPosition()).uid).child("notice").push().setValue(noticeData);
 
                                                     dlgChatJoinAgree.dismiss();

@@ -13,8 +13,8 @@
         android:layout_marginLeft="20dp">
     <ImageView
         android:id="@+id/noticeitem_imageview"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_margin="5dp"
         android:src="@drawable/bell" />
 
@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/yellow"
             android:layout_gravity="center"
+            android:fontFamily="@font/extrabold"
             android:textSize="20dp"
             android:layout_marginLeft="5dp"
             android:text="00:00:00" />
@@ -34,8 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="25dp"
+            android:fontFamily="@font/extrabold"
+            android:textColor="@color/light"
+            android:textSize="20dp"
             android:text="알림내용"/>
     </LinearLayout>
 

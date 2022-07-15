@@ -14,9 +14,10 @@
 
         <TextView
             android:id="@+id/messageItem_textview_nickName"
-            android:text="닉네임"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:fontFamily="@font/bold"
+            android:text="닉네임" />
 
     </LinearLayout>
     <LinearLayout
@@ -28,7 +29,8 @@
             android:text="메시지"
             android:id="@+id/messageItem_textView_message"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"/>
 
     </LinearLayout>
 

@@ -81,7 +81,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/round_button"
-            android:text="채팅방 개설" />
+            android:text="파티 주최 하기" />
 
         <ImageButton
             android:id="@+id/like"
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="@font/extrabold"
-        android:text="생성된 채팅방(참여자순)"
+        android:text="진행중인 파티(인기 순)"
         android:textColor="@color/light"
         android:textSize="25dp" />
 
